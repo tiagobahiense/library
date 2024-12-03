@@ -1,21 +1,24 @@
 public class Cliente {
-    public int _Id;
-    public string _Nome;
-    public string _Endereco;
-    public string _Telefone;
-    public string _Email;
-    public DateTime _DataNascimento;
+    private int _Id;
+    private string _Nome;
+    private string _Endereco;
+    private string _Telefone;
+    private string _Email;
+    private DateTime _DataNascimento;
 
-    public Cliente(int Id, string Nome, string Endereco, string Telefone, string Email, DateTime DataNascimento) {
-        _Id = Id;
-        _Nome = Nome;
-        _Endereco = Endereco;
-        _Telefone = Telefone;
-        _Email = Email;
-        _DataNascimento = DataNascimento;
+    public Cliente(int id, string nome, string endereco, string telefone, string email, DateTime dataNascimento) {
+        Id = id;
+        Nome = nome;
+        Endereco = endereco;
+        Telefone = telefone;
+        Email = email;
+        DataNascimento = dataNascimento;
     }
 
-    public int Id{get; set;}
+    public int Id{
+        get => _Id;
+        private set => _Id = value;
+    }
     public string Nome {get; set;}
     public string Endereco {get; set;}
 
@@ -43,7 +46,7 @@ public class Cliente {
         get{ return _DataNascimento;}
         set{
             if(value > DateTime.Now){
-                throw new ArgumentException("Data não pode ser Futura.")
+                throw new ArgumentException("Data não pode ser Futura.");
             }
             _DataNascimento = value;
         }
