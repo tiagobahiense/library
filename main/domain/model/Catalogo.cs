@@ -16,13 +16,19 @@ public class Catalogo {
     }
 
     public int Id{
-        get => _Id;
-        private set => _Id = value;
+        get {return _Id;}
+        private set {_Id = value;}
     }
 
-    public string Titulo{get;set;}
+    public string Titulo{
+        get {return _Titulo;}
+        set {_Titulo = value;}
+    }
 
-    public string Autor{get;set;}
+    public string Autor{
+        get {return _Autor;}
+        set {_Autor = value;}
+    }
 
     public int AnoLancamento{
         get {return _AnoLancamento;}
@@ -38,8 +44,14 @@ public class Catalogo {
         }
     }
 
-    public string Genero{get;set;}
+    public string Genero{
+        get {return _Genero;}
+        set {_Genero = value;}
+    }
 
-    public int NumeroPaginas{get;set;}
+    public int NumeroPaginas{
+        get {return _NumeroPaginas;}
+        set {_NumeroPaginas = value;}
+    }
 
 }

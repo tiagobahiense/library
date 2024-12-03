@@ -16,11 +16,17 @@ public class Cliente {
     }
 
     public int Id{
-        get => _Id;
-        private set => _Id = value;
+        get  { return _Id;}
+        private set { _Id = value;}
     }
-    public string Nome {get; set;}
-    public string Endereco {get; set;}
+    public string Nome {
+        get { return _Nome;}
+        set { _Nome = value;}
+    }
+    public string Endereco {
+        get { return _Endereco;}
+        set { _Endereco = value;}
+    }
 
     public string Telefone{
         get{ return _Telefone;}
