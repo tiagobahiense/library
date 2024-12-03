@@ -1,13 +1,13 @@
 public class Catalogo {
-    private int _Id;
+    private Guid _IdCatalogo;
     private string _Titulo;
     private string _Autor;
     private int _AnoLancamento;
     private string _Genero;
     private int _NumeroPaginas;
 
-    public Catalogo (int id, string titulo, string autor, int anoLancamento, string genero, int numeroPaginas){
-        Id = id;
+    public Catalogo (Guid idCatalogo, string titulo, string autor, int anoLancamento, string genero, int numeroPaginas){
+        IdCatalogo = idCatalogo;
         Titulo = titulo;
         Autor = autor;
         AnoLancamento = anoLancamento;
@@ -15,9 +15,9 @@ public class Catalogo {
         NumeroPaginas = numeroPaginas;
     }
 
-    public int Id{
-        get {return _Id;}
-        private set {_Id = value;}
+    public Guid IdCatalogo{
+        get {return _IdCatalogo;}
+        private set {_IdCatalogo = value;}
     }
 
     public string Titulo{

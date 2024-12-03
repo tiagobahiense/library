@@ -1,18 +1,18 @@
 public class Inventario {
-    private int _Id;
-    private int _IdCatalogo;
+    private Guid _Id;
+    private Guid _IdCatalogo;
 
-    public Inventario (int id, int idCatalogo){
+    public Inventario (Guid id, Guid idCatalogo){
         Id = id;
         IdCatalogo = idCatalogo;
     }
 
-    public int Id{
+    public Guid Id{
         get {return _Id;}
         private set {_Id = value;}
     }
 
-    public int IdCatalogo{
+    public Guid IdCatalogo{
         get {return _IdCatalogo;}
         private set {_IdCatalogo = value;}
     }

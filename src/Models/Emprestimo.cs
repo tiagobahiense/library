@@ -1,6 +1,6 @@
 public class Emprestimo {
-    private int _IdInventario;
-    private int _IdCliente;
+    private Guid _IdInventario;
+    private Guid _IdCliente;
     private DateTime _DataEmprestimo;
     private DateTime _DataDevolucao;
 
@@ -11,12 +11,12 @@ public class Emprestimo {
         DataDevolucao = dataDevolucao;
     }
 
-    public int IdInventario{
+    public Guid IdInventario{
         get {return _IdInventario;}
         private set {_IdInventario = value;}
     }
 
-    public int IdCliente{
+    public Guid IdCliente{
         get {return _IdCliente;}
         private set {_IdCliente = value;}
     }
