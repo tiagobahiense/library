@@ -1,12 +1,12 @@
 public class Cliente {
-    private Guid _Id;
+    private int _Id;
     private string _Nome;
     private string _Endereco;
     private string _Telefone;
     private string _Email;
     private DateTime _DataNascimento;
 
-    public Cliente(Guid id, string nome, string endereco, string telefone, string email, DateTime dataNascimento) {
+    public Cliente(int id, string nome, string endereco, string telefone, string email, DateTime dataNascimento) {
         Id = id;
         Nome = nome;
         Endereco = endereco;
@@ -15,7 +15,7 @@ public class Cliente {
         DataNascimento = dataNascimento;
     }
 
-    public Guid Id{
+    public int Id{
         get  { return _Id;}
         private set { _Id = value;}
     }

@@ -1,19 +1,21 @@
-public class Inventario {
-    private Guid _Id;
-    private Guid _IdCatalogo;
+public class Inventario
+{
+    private int _idIventario; 
+    private Dictionary<int, int> _itens; 
 
-    public Inventario (Guid id, Guid idCatalogo){
+    public Inventario(int id, Dictionary<int, int> itens)
+    {
         Id = id;
-        IdCatalogo = idCatalogo;
+        Itens = itens ?? new Dictionary<int,int>();
     }
 
-    public Guid Id{
-        get {return _Id;}
-        private set {_Id = value;}
+    public int Id{
+        get {return _idIventario;}
+        set {_idIventario = value;}
     }
 
-    public Guid IdCatalogo{
-        get {return _IdCatalogo;}
-        private set {_IdCatalogo = value;}
+    public Dictionary<int, int> Itens{
+        get {return _itens;}
+        set {_itens = value ?? new Dictionary<int, int>();}
     }
 }

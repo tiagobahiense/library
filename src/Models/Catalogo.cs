@@ -1,12 +1,12 @@
 public class Catalogo {
-    private Guid _IdCatalogo;
-    private string _Titulo;
-    private string _Autor;
-    private int _AnoLancamento;
-    private string _Genero;
-    private int _NumeroPaginas;
+    private int _idCatalogo;
+    private string _titulo;
+    private string _autor;
+    private int _anoLancamento;
+    private string _genero;
+    private int _numeroPaginas;
 
-    public Catalogo (Guid idCatalogo, string titulo, string autor, int anoLancamento, string genero, int numeroPaginas){
+    public Catalogo (int idCatalogo, string titulo, string autor, int anoLancamento, string genero, int numeroPaginas){
         IdCatalogo = idCatalogo;
         Titulo = titulo;
         Autor = autor;
@@ -15,43 +15,43 @@ public class Catalogo {
         NumeroPaginas = numeroPaginas;
     }
 
-    public Guid IdCatalogo{
-        get {return _IdCatalogo;}
-        private set {_IdCatalogo = value;}
+    public int IdCatalogo{
+        get {return _idCatalogo;}
+        private set {_idCatalogo = value;}
     }
 
     public string Titulo{
-        get {return _Titulo;}
-        set {_Titulo = value;}
+        get {return _titulo;}
+        set {_titulo = value;}
     }
 
     public string Autor{
-        get {return _Autor;}
-        set {_Autor = value;}
+        get {return _autor;}
+        set {_autor = value;}
     }
 
     public int AnoLancamento{
-        get {return _AnoLancamento;}
+        get {return _anoLancamento;}
         set {
-            int anoAtual = Datetime.Now.Year;
+            int anoAtual = DateTime.Now.Year;
             if (value > anoAtual){
-                throw new ArgumentException("O ano de lançamento não pode ser um ano futuro.")
+                throw new ArgumentException("O ano de lançamento não pode ser um ano futuro.");
             }
             if (value < 1){
-                throw new ArgumentException("O ano de lançamento deve ser um número positivo.")
+                throw new ArgumentException("O ano de lançamento deve ser um número positivo.");
             }
-            _AnoLancamento = value;
+        _anoLancamento = value;
         }
     }
 
     public string Genero{
-        get {return _Genero;}
-        set {_Genero = value;}
+        get {return _genero;}
+        set {_genero = value;}
     }
 
     public int NumeroPaginas{
-        get {return _NumeroPaginas;}
-        set {_NumeroPaginas = value;}
+        get {return _numeroPaginas;}
+        set {_numeroPaginas = value;}
     }
 
 }
