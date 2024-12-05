@@ -1,8 +1,8 @@
 public class Emprestimo {
-    private int _IdInventario;
-    private int _IdCliente;
-    private DateTime _DataEmprestimo;
-    private DateTime _DataDevolucao;
+    private int _idInventario;
+    private int _idCliente;
+    private DateTime _dataEmprestimo;
+    private DateTime _dataDevolucao;
 
     public Emprestimo (int idInventario, int idCliente, DateTime dataEmprestimo, DateTime dataDevolucao){
         IdInventario = idInventario;
@@ -12,34 +12,34 @@ public class Emprestimo {
     }
 
     public int IdInventario{
-        get {return _IdInventario;}
-        private set {_IdInventario = value;}
+        get {return _idInventario;}
+        private set {_idInventario = value;}
     }
 
     public int IdCliente{
-        get {return _IdCliente;}
-        private set {_IdCliente = value;}
+        get {return _idCliente;}
+        private set {_idCliente = value;}
     }
 
     public DateTime DataEmprestimo{
-        get {return _DataEmprestimo;}
+        get {return _dataEmprestimo;}
         set{
             DateTime dataAtual = DateTime.Now;
             if( value < dataAtual){
                 throw new ArgumentException("A data não pode ser anterior a data atual.")
             }
-            _DataEmprestimo = value;
+            _dataEmprestimo = value;
         }
     }
 
     public DateTime DataDevolucao{
-        get {return _DataDevolucao;}
+        get {return _dataDevolucao;}
         set {
             DateTime dataAtual = DateTime.Now;
             if(value <= dataAtual){
                 throw new ArgumentException("A data de devolução não pode ser menor ou igual a data atual.")
             }
-            _DataDevolucao = value;
+            _dataDevolucao = value;
         }
     }
 }
