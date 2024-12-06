@@ -1,4 +1,3 @@
-public class CadastrarInventarioDto{
-    public int IdIventario{get;set;} 
+public class CadastrarInventarioDto{ 
     public Dictionary<int, int> Itens{get;set;}
 }

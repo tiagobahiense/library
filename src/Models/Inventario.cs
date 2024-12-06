@@ -1,6 +1,5 @@
 public class Inventario
 {
-    private int _idIventario; 
     private Dictionary<int, int> _itens; 
 
     public Inventario(int id, Dictionary<int, int> itens)
