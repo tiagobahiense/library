@@ -1,6 +1,6 @@
 public interface ICatalogoService{
-    void AdicionarCatalogo(CatalogoDto catalogoDto);
+    void AdicionarCatalogo(CadastrarCatalogoDto catalogoDto);
     void RemoverCatalogo(int catalogoId);
-    CatalogoDto BuscarCatalogoPorId(int catalogoId);
-    IEnumerable <CatalogoDto> BuscarTodosOsCatalogos();
+    DetalhesCatalogoDto BuscarCatalogoPorId(int catalogoId);
+    IEnumerable <DetalhesCatalogoDto> BuscarTodosOsCatalogos();
 }

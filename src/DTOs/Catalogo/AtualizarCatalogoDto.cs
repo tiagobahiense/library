@@ -1,3 +1,4 @@
+namespace Livraria.Dtos.Catalogo;
 public class AtualizarCatalogoDto{
     public string Titulo{get;set;}
     public string Autor{get;set;}

@@ -1,3 +1,5 @@
+namespace Livraria.Dtos.Cliente;
+
 public class AtualizarClienteDto{
     public string Nome {get; set;}
     public string Email {get; set;}

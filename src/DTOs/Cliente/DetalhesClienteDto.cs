@@ -1,3 +1,4 @@
+namespace Livraria.Dtos.Cliente;
 public class DetalhesClienteDto{
     public int Id {get;}
     public string Nome {get;}

@@ -26,7 +26,7 @@ public class Emprestimo {
         set{
             DateTime dataAtual = DateTime.Now;
             if( value < dataAtual){
-                throw new ArgumentException("A data não pode ser anterior a data atual.")
+                throw new ArgumentException("A data não pode ser anterior a data atual.");
             }
             _dataEmprestimo = value;
         }
@@ -37,8 +37,8 @@ public class Emprestimo {
         set {
             DateTime dataAtual = DateTime.Now;
             if(value <= dataAtual){
-                throw new ArgumentException("A data de devolução não pode ser menor ou igual a data atual.")
-            }
+                throw new ArgumentException("A data de devolução não pode ser menor ou igual a data atual.");
+                }
             _dataDevolucao = value;
         }
     }

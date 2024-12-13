@@ -1,3 +1,5 @@
+namespace Livraria.Dtos.Catalogo;
+
 public class DetalhesCatalogoDto{
     public int CatalogoId{get;}
     public string Titulo{get;}

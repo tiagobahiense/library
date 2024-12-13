@@ -1,3 +1,4 @@
+namespace Livraria.Dtos.Emprestimo;
 public class DetalhesEmprestimoDto{
     public int IdInventario{get;}
     public int IdCliente{get;}
