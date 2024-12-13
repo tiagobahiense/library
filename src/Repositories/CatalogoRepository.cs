@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using Livraria.Models.Catalogo;
+using Livraria.Dtos.Catalogo;
 
 
 public class CatalogoRepository : ICatalogoRepository

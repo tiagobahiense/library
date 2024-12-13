@@ -1,3 +1,4 @@
+using Livraria.Dtos.Catalogo;
 public interface ICatalogoService{
     void AdicionarCatalogo(CadastrarCatalogoDto catalogoDto);
     void RemoverCatalogo(int catalogoId);

@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-
+using Livraria.Models.Inventario;
 
 public class InventarioRepository : IInventarioRepository
 {

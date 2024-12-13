@@ -1,3 +1,5 @@
+using Livraria.Dtos.Emprestimo;
+using Livraria.Dtos.Cliente;
 public interface IClienteService {
     void CadastrarCliente(CadastrarClienteDto clienteDto);
     void AtualizarCliente(int clienteId, AtualizarClienteDto clienteDto);

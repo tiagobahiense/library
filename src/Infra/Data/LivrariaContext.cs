@@ -16,8 +16,8 @@ namespace Livraria.Infra.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            // Defina as chaves primárias ou qualquer outra configuração necessária
-            modelBuilder.Entity<Cliente>().HasKey(c => c.Id);  // Exemplo de configuração
+            
+            modelBuilder.Entity<Cliente>().HasKey(c => c.Id);
         }
     }
 }

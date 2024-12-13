@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Livraria.Models.Emprestimo;
 
 
 public class EmprestimoRepository : IEmprestimoRepository

@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Livraria.Models.Cliente;
 
 
 public class ClienteRepository : IClienteRepository

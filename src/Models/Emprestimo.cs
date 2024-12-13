@@ -1,3 +1,4 @@
+namespace Livraria.Models.Emprestimo;
 public class Emprestimo {
     private int _idInventario;
     private int _idCliente;
