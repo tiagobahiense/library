@@ -1,5 +1,8 @@
+using Library.Models;
+using Library.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using Livraria.Models.Emprestimo;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 
 public class EmprestimoRepository : IEmprestimoRepository

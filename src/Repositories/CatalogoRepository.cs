@@ -1,6 +1,8 @@
+using Library.Models;
+using Library.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using Livraria.Models.Catalogo;
-using Livraria.Dtos.Catalogo;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 
 public class CatalogoRepository : ICatalogoRepository

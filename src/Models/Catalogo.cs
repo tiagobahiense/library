@@ -1,68 +1,70 @@
-namespace Livraria.Models.Catalogo;
-public class Catalogo
+namespace Library.Models
 {
-    private int _idCatalogo;
-    private string _titulo;
-    private string _autor;
-    private int _anoLancamento;
-    private string _genero;
-    private int _numeroPaginas;
-
-    public Catalogo(int idCatalogo, string titulo, string autor, int anoLancamento, string genero, int numeroPaginas)
+    public class Catalogo
     {
-        IdCatalogo = idCatalogo;
-        Titulo = titulo;
-        Autor = autor;
-        AnoLancamento = anoLancamento;
-        Genero = genero;
-        NumeroPaginas = numeroPaginas;
-    }
+        private int _idCatalogo;
+        private string _titulo;
+        private string _autor;
+        private int _anoLancamento;
+        private string _genero;
+        private int _numeroPaginas;
 
-    public int IdCatalogo
-    {
-        get { return _idCatalogo; }
-        private set { _idCatalogo = value; }
-    }
-
-    public string Titulo
-    {
-        get { return _titulo; }
-        private set { _titulo = value; }  
-    }
-
-    public string Autor
-    {
-        get { return _autor; }
-        private set { _autor = value; }  
-    }
-
-    public int AnoLancamento
-    {
-        get { return _anoLancamento; }
-        private set
+        public Catalogo(int idCatalogo, string titulo, string autor, int anoLancamento, string genero, int numeroPaginas)
         {
-            int anoAtual = DateTime.Now.Year;
-            if (value > anoAtual)
-            {
-                throw new ArgumentException("O ano de lançamento não pode ser um ano futuro.");
-            }
-            if (value < 1)
-            {
-                throw new ArgumentException("O ano de lançamento deve ser um número positivo.");
-            }
-            _anoLancamento = value;
+            IdCatalogo = idCatalogo;
+            Titulo = titulo;
+            Autor = autor;
+            AnoLancamento = anoLancamento;
+            Genero = genero;
+            NumeroPaginas = numeroPaginas;
         }
-    }
 
-    public string Genero
-    {
-        get { return _genero; }
-        private set { _genero = value; } 
-    }
+        public int IdCatalogo
+        {
+            get { return _idCatalogo; }
+            private set { _idCatalogo = value; }
+        }
 
-    public int NumeroPaginas
-    {
-        get { return _numeroPaginas; }
-        private set { _numeroPaginas = value; } 
+        public string Titulo
+        {
+            get { return _titulo; }
+            private set { _titulo = value; }  
+        }
+
+        public string Autor
+        {
+            get { return _autor; }
+            private set { _autor = value; }  
+        }
+
+        public int AnoLancamento
+        {
+            get { return _anoLancamento; }
+            private set
+            {
+                int anoAtual = DateTime.Now.Year;
+                if (value > anoAtual)
+                {
+                    throw new ArgumentException("O ano de lançamento não pode ser um ano futuro.");
+                }
+                if (value < 1)
+                {
+                    throw new ArgumentException("O ano de lançamento deve ser um número positivo.");
+                }
+                _anoLancamento = value;
+            }
+        }
+
+        public string Genero
+        {
+            get { return _genero; }
+            private set { _genero = value; } 
+        }
+
+        public int NumeroPaginas
+        {
+            get { return _numeroPaginas; }
+            private set { _numeroPaginas = value; } 
+        }
     }
 }
