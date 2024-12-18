@@ -11,12 +11,12 @@ namespace Library.Models
 
         public Catalogo(int idCatalogo, string titulo, string autor, int anoLancamento, string genero, int numeroPaginas)
         {
-            IdCatalogo = idCatalogo;
-            Titulo = titulo;
-            Autor = autor;
-            AnoLancamento = anoLancamento;
-            Genero = genero;
-            NumeroPaginas = numeroPaginas;
+            _idCatalogo = idCatalogo;
+            _titulo = titulo;
+            _autor = autor;
+            _anoLancamento = anoLancamento;
+            _genero = genero;
+            _numeroPaginas = numeroPaginas;
         }
 
         public int IdCatalogo
