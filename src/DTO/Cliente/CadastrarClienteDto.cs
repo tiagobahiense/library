@@ -1,5 +1,6 @@
-namespace Livraria.Dtos.Cliente;
-public class CadastrarClienteDto{
+namespace Library.DTO.Cliente
+{
+    public class CadastrarClienteDto{
     public string Nome {get; set;}
     public string Email {get; set;}
     public string Endereco {get; set;}
@@ -7,4 +8,5 @@ public class CadastrarClienteDto{
     public DateTime DataNascimento {get; set;}
     public string Telefone {get; set;}
 
+    }
 }

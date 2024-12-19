@@ -22,25 +22,25 @@ namespace Library.Models
         public int IdCatalogo
         {
             get { return _idCatalogo; }
-            private set { _idCatalogo = value; }
+            set { _idCatalogo = value; }
         }
 
         public string Titulo
         {
             get { return _titulo; }
-            private set { _titulo = value; }  
+            set { _titulo = value; }  
         }
 
         public string Autor
         {
             get { return _autor; }
-            private set { _autor = value; }  
+            set { _autor = value; }  
         }
 
         public int AnoLancamento
         {
             get { return _anoLancamento; }
-            private set
+            set
             {
                 int anoAtual = DateTime.Now.Year;
                 if (value > anoAtual)
@@ -58,13 +58,13 @@ namespace Library.Models
         public string Genero
         {
             get { return _genero; }
-            private set { _genero = value; } 
+            set { _genero = value; } 
         }
 
         public int NumeroPaginas
         {
             get { return _numeroPaginas; }
-            private set { _numeroPaginas = value; } 
+            set { _numeroPaginas = value; } 
         }
     }
 }

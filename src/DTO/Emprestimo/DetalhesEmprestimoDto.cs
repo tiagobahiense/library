@@ -1,7 +1,9 @@
-namespace Livraria.Dtos.Emprestimo;
-public class DetalhesEmprestimoDto{
+namespace Library.DTO.Emprestimo
+{
+    public class DetalhesEmprestimoDto{
     public int IdInventario{get;}
     public int IdCliente{get;}
     public DateTime DataEmprestimo{get;}
     public DateTime DataDevolucao{get;}
+    }
 }
