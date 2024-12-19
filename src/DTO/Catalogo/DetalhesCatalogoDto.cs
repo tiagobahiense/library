@@ -1,6 +1,6 @@
-using Library.Models;
+using Library.src.Models;
 
-namespace Library.DTO.Catalogo
+namespace Library.src.DTO.Catalogo
 {
     public class DetalhesCatalogoDto
     {
