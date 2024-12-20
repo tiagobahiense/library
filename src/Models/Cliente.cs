@@ -8,15 +8,17 @@ namespace Library.src.Models
         private string _telefone;
         private string _email;
         private DateTime _dataNascimento;
+        private string _cpf;
 
-        public Cliente(int id, string nome, string endereco, string telefone, string email, DateTime dataNascimento)
+        public Cliente(int id, string nome, string endereco, string telefone, string email, DateTime dataNascimento, string cpf)
         {
             _id = id;
             _nome = nome;
             _endereco = endereco;
-            _telefone = telefone; 
-            _email = email; 
+            _telefone = telefone;
+            _email = email;
             _dataNascimento = dataNascimento;
+            _cpf = cpf;
         }
 
         public int Id
@@ -74,6 +76,12 @@ namespace Library.src.Models
                 }
                 _dataNascimento = value;
             }
+        }
+
+        public string CPF
+        {
+            get { return _cpf; }
+            set { _cpf = value; }
         }
     }
 }
