@@ -1,4 +1,4 @@
-namespace Library.Models
+namespace Library.src.Models
 {
     public class Inventario
     {

@@ -1,4 +1,4 @@
-namespace Library.DTO.Cliente
+namespace Library.src.DTO.Cliente
 {
     public class DetalhesClienteDto{
     public int Id {get;}

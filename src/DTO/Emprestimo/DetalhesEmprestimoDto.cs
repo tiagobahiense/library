@@ -1,4 +1,4 @@
-namespace Library.DTO.Emprestimo
+namespace Library.src.DTO.Emprestimo
 {
     public class DetalhesEmprestimoDto{
     public int IdInventario{get;}

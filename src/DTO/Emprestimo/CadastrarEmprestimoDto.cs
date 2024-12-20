@@ -1,4 +1,4 @@
-namespace Library.DTO.Emprestimo
+namespace Library.src.DTO.Emprestimo
 {
     public class CadastrarEmprestimoDto{
     public DateTime DataEmprestimo{get;set;}

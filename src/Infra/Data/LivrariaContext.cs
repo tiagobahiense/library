@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace Livraria.Infra.Data
+namespace Library.src.Infra.Data
 {
     public class LivrariaContext : DbContext
     {

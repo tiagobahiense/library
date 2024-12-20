@@ -1,4 +1,4 @@
-namespace Library.DTO.Cliente
+namespace Library.src.DTO.Cliente
 {
     public class CadastrarClienteDto{
     public string Nome {get; set;}
