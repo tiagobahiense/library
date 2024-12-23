@@ -9,8 +9,9 @@ namespace Library.src.Models
         private Dictionary<int, int> _itens;
         private int _idInventario;
 
-        public Inventario(Dictionary<int, int> itens)
+        public Inventario(int id, Dictionary<int, int> itens)
         {
+            _idInventario = id;
             _itens = itens ?? new Dictionary<int, int>();
         }
 

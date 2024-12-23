@@ -1,4 +1,3 @@
-using Library.src.DTO.Emprestimos;
 using Library.src.Models;
 using Library.src.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -16,38 +15,26 @@ namespace Library.src.Repositories
             _context = context;
         }
 
-        public DetalhesEmprestimoDto ObterPorId(int id)
+        public Emprestimo ObterPorId(int id)
         {
-            var emprestimo = _context.Set<Emprestimo>().Find(id);
-            if (emprestimo != null)
-            {
-                return new DetalhesEmprestimoDto(emprestimo);
-            }
-            throw new KeyNotFoundException($"Emprestimo com ID {id} não encontrado.");
+            return _context.Set<Emprestimo>().Find(id);
         }
 
-        public IEnumerable<DetalhesEmprestimoDto> ObterTodos()
+        public IEnumerable<Emprestimo> ObterTodos()
         {
-            return _context.Set<Emprestimo>().Select(e => new DetalhesEmprestimoDto(e)).ToList();
+            return _context.Set<Emprestimo>().ToList();
         }
 
-        public void Adicionar(CadastrarEmprestimoDto emprestimoDto)
+        public void Adicionar(Emprestimo emprestimo)
         {
-            var emprestimo = emprestimoDto.ToEmprestimo(0, 0);
             _context.Set<Emprestimo>().Add(emprestimo);
             _context.SaveChanges();
         }
 
-        public void Atualizar(CadastrarEmprestimoDto emprestimoDto, int id)
+        public void Atualizar(Emprestimo emprestimo)
         {
-            var emprestimo = _context.Set<Emprestimo>().Find(id);
-            if (emprestimo != null)
-            {
-                emprestimo.DataEmprestimo = emprestimoDto.DataEmprestimo;
-                emprestimo.DataDevolucao = emprestimoDto.DataDevolucao;
-                _context.Set<Emprestimo>().Update(emprestimo);
-                _context.SaveChanges();
-            }
+            _context.Set<Emprestimo>().Update(emprestimo);
+            _context.SaveChanges();
         }
 
         public void Remover(int id)

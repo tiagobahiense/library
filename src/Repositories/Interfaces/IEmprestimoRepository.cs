@@ -1,14 +1,14 @@
-using Library.src.DTO.Emprestimos;
+using Library.src.Models;
 using System.Collections.Generic;
 
 namespace Library.src.Repositories.Interfaces
 {
     public interface IEmprestimoRepository
     {
-        DetalhesEmprestimoDto ObterPorId(int id);
-        IEnumerable<DetalhesEmprestimoDto> ObterTodos();
-        void Adicionar(CadastrarEmprestimoDto emprestimoDto);
-        void Atualizar(CadastrarEmprestimoDto emprestimoDto, int id);
+        Emprestimo ObterPorId(int id);
+        IEnumerable<Emprestimo> ObterTodos();
+        void Adicionar(Emprestimo emprestimo);
+        void Atualizar(Emprestimo emprestimo);
         void Remover(int id);
     }
 }

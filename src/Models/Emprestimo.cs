@@ -16,8 +16,8 @@ namespace Library.src.Models
         {
             _idInventario = idInventario;
             _idCliente = idCliente;
-            _dataEmprestimo = dataEmprestimo;
-            _dataDevolucao = dataDevolucao;
+            DataEmprestimo = dataEmprestimo;
+            DataDevolucao = dataDevolucao; 
         }
 
         [Key]

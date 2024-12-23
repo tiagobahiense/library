@@ -33,20 +33,15 @@ namespace Library.src.Repositories
 
         public void Adicionar(CadastrarInventarioDto inventarioDto)
         {
-            var inventario = inventarioDto.ToInventario(0);
+            var inventario = inventarioDto.ToInventario(0); // Assumindo que o ID será gerado automaticamente
             _context.Set<Inventario>().Add(inventario);
             _context.SaveChanges();
         }
 
-        public void Atualizar(AtualizarInventarioDto inventarioDto, int id)
+        public void Atualizar(Inventario inventario)
         {
-            var inventario = _context.Set<Inventario>().Find(id);
-            if (inventario != null)
-            {
-                inventario.Itens = inventarioDto.Itens;
-                _context.Set<Inventario>().Update(inventario);
-                _context.SaveChanges();
-            }
+            _context.Set<Inventario>().Update(inventario);
+            _context.SaveChanges();
         }
 
         public void Remover(int id)

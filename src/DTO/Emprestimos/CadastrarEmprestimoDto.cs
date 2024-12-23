@@ -1,15 +1,16 @@
 using Library.src.Models;
+using System;
 
 namespace Library.src.DTO.Emprestimos
 {
     public class CadastrarEmprestimoDto
     {
+        public int IdInventario { get; set; }
         public DateTime DataEmprestimo { get; set; }
-        public DateTime DataDevolucao { get; set; }
 
-        public Emprestimo ToEmprestimo(int idInventario, int idCliente)
+        public Emprestimo ToEmprestimo(int idCliente)
         {
-            return new Emprestimo(idInventario, idCliente, DataEmprestimo, DataDevolucao);
+            return new Emprestimo(IdInventario, idCliente, DataEmprestimo, DateTime.MinValue);
         }
     }
 }
