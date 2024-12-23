@@ -1,12 +1,16 @@
+using Library.src.DTO.Inventarios;
+using System.Collections.Generic;
+
 namespace Library.src.Repositories.Interfaces
 {
     public interface IInventarioRepository
     {
-        Inventario ObterPorId(int id);
-        IEnumerable<Inventario> ObterTodos();
-        void Adicionar(Inventario inventario);
-        void Atualizar(Inventario inventario);
+        DetalhesInventarioDto ObterPorId(int id);
+        IEnumerable<DetalhesInventarioDto> ObterTodos();
+        void Adicionar(CadastrarInventarioDto inventarioDto);
+        void Atualizar(AtualizarInventarioDto inventarioDto, int id);
         void Remover(int id);
     }
 }
+
 

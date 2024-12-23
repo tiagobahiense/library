@@ -1,11 +1,14 @@
+using Library.src.DTO.Clientes;
+using System.Collections.Generic;
+
 namespace Library.src.Repositories.Interfaces
 {
     public interface IClienteRepository
     {
-        Cliente ObterPorId(int id);
-        IEnumerable<Cliente> ObterTodos();
-        void Adicionar(Cliente cliente);
-        void Atualizar(Cliente cliente);
+        DetalhesClienteDto ObterPorId(int id);
+        IEnumerable<DetalhesClienteDto> ObterTodos();
+        void Adicionar(CadastrarClienteDto clienteDto);
+        void Atualizar(AtualizarClienteDto clienteDto, int id);
         void Remover(int id);
     }
 }

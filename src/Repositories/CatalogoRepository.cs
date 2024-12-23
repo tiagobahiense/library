@@ -1,10 +1,12 @@
+using Library.src.DTO.Catalogos;
 using Library.src.Models;
 using Library.src.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.Linq;
 
-namespace Library.src.Repositories{
+namespace Library.src.Repositories
+{
     public class CatalogoRepository : ICatalogoRepository
     {
         private readonly DbContext _context;
@@ -14,31 +16,46 @@ namespace Library.src.Repositories{
             _context = context;
         }
 
-        public Catalogo ObterPorId(int id)
+        public DetalhesCatalogoDto ObterPorId(int id)
         {
-            return _context.Set<Catalogo>().Find(id);
+            var catalogo = _context.Set<Catalogo>().Find(id);
+            if (catalogo != null)
+            {
+                return new DetalhesCatalogoDto(catalogo);
+            }
+            throw new KeyNotFoundException($"Catalogo com ID {id} não encontrado.");
         }
 
-        public IEnumerable<Catalogo> ObterTodos()
+        public IEnumerable<DetalhesCatalogoDto> ObterTodos()
         {
-            return _context.Set<Catalogo>().ToList();
+            return _context.Set<Catalogo>().Select(c => new DetalhesCatalogoDto(c)).ToList();
         }
 
-        public void Adicionar(Catalogo catalogo)
+        public void Adicionar(CadastrarCatalogoDto catalogoDto)
         {
+            var catalogo = catalogoDto.ToCatalogo(0);
             _context.Set<Catalogo>().Add(catalogo);
             _context.SaveChanges();
         }
 
-        public void Atualizar(Catalogo catalogo)
+        public void Atualizar(AtualizarCatalogoDto catalogoDto, int id)
         {
-            _context.Set<Catalogo>().Update(catalogo);
-            _context.SaveChanges();
+            var catalogo = _context.Set<Catalogo>().Find(id);
+            if (catalogo != null)
+            {
+                catalogo.Titulo = catalogoDto.Titulo;
+                catalogo.Autor = catalogoDto.Autor;
+                catalogo.AnoLancamento = catalogoDto.AnoLancamento;
+                catalogo.Genero = catalogoDto.Genero;
+                catalogo.NumeroPaginas = catalogoDto.NumeroPaginas;
+                _context.Set<Catalogo>().Update(catalogo);
+                _context.SaveChanges();
+            }
         }
 
         public void Remover(int id)
         {
-            var catalogo = ObterPorId(id);
+            var catalogo = _context.Set<Catalogo>().Find(id);
             if (catalogo != null)
             {
                 _context.Set<Catalogo>().Remove(catalogo);
@@ -47,4 +64,3 @@ namespace Library.src.Repositories{
         }
     }
 }
-

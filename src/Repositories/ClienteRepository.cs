@@ -1,11 +1,13 @@
+using Library.src.DTO.Clientes;
 using Library.src.Models;
 using Library.src.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.Linq;
 
-namespace Library.src.Repositories{
-        public class ClienteRepository : IClienteRepository
+namespace Library.src.Repositories
+{
+    public class ClienteRepository : IClienteRepository
     {
         private readonly DbContext _context;
 
@@ -14,31 +16,46 @@ namespace Library.src.Repositories{
             _context = context;
         }
 
-        public Cliente ObterPorId(int id)
+        public DetalhesClienteDto ObterPorId(int id)
         {
-            return _context.Set<Cliente>().Find(id);
+            var cliente = _context.Set<Cliente>().Find(id);
+            if (cliente != null)
+            {
+                return new DetalhesClienteDto(cliente);
+            }
+            throw new KeyNotFoundException($"Cliente com ID {id} não encontrado.");
         }
 
-        public IEnumerable<Cliente> ObterTodos()
+        public IEnumerable<DetalhesClienteDto> ObterTodos()
         {
-            return _context.Set<Cliente>().ToList();
+            return _context.Set<Cliente>().Select(c => new DetalhesClienteDto(c)).ToList();
         }
 
-        public void Adicionar(Cliente cliente)
+        public void Adicionar(CadastrarClienteDto clienteDto)
         {
+            var cliente = clienteDto.ToCliente(0);
             _context.Set<Cliente>().Add(cliente);
             _context.SaveChanges();
         }
 
-        public void Atualizar(Cliente cliente)
+        public void Atualizar(AtualizarClienteDto clienteDto, int id)
         {
-            _context.Set<Cliente>().Update(cliente);
-            _context.SaveChanges();
+            var cliente = _context.Set<Cliente>().Find(id);
+            if (cliente != null)
+            {
+                cliente.Nome = clienteDto.Nome;
+                cliente.Email = clienteDto.Email;
+                cliente.Endereco = clienteDto.Endereco;
+                cliente.Telefone = clienteDto.Telefone;
+                cliente.CPF = clienteDto.CPF;
+                _context.Set<Cliente>().Update(cliente);
+                _context.SaveChanges();
+            }
         }
 
         public void Remover(int id)
         {
-            var cliente = ObterPorId(id);
+            var cliente = _context.Set<Cliente>().Find(id);
             if (cliente != null)
             {
                 _context.Set<Cliente>().Remove(cliente);
@@ -47,4 +64,3 @@ namespace Library.src.Repositories{
         }
     }
 }
-
