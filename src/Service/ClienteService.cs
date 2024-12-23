@@ -30,13 +30,13 @@ namespace Library.src.Service
         public DetalhesClienteDto ObterClientePorId(int clienteId)
         {
             var cliente = _clienteRepository.ObterPorId(clienteId);
-            return cliente != null ? new DetalhesClienteDto(cliente) : null;
+            return cliente != null ? new DetalhesClienteDto(cliente) : new DetalhesClienteDto(new Cliente("", "", "", "", DateTime.Now, ""));
         }
 
         public IEnumerable<DetalhesEmprestimoDto> ObterEmprestimosDoCliente(int clienteId)
         {
             var emprestimos = _clienteRepository.ObterEmprestimosDoCliente(clienteId);
-            return emprestimos.Select(e => new DetalhesEmprestimoDto(e));
+            return emprestimos.Select(e => new DetalhesEmprestimoDto(e)).ToList();
         }
     }
 }

@@ -41,7 +41,7 @@ namespace Library.src.Repositories
 
         public Cliente ObterPorId(int id)
         {
-            return _context.Set<Cliente>().Find(id);
+            return _context.Set<Cliente>().Find(id) ?? new Cliente("", "", "", "", DateTime.Now, "");
         }
 
         public IEnumerable<Cliente> ObterTodos()

@@ -41,7 +41,7 @@ namespace Library.src.Repositories
         public DetalhesCatalogoDto ObterPorId(int id)
         {
             var catalogo = _context.Set<Catalogo>().Find(id);
-            return catalogo != null ? new DetalhesCatalogoDto(catalogo) : null;
+            return catalogo != null ? new DetalhesCatalogoDto(catalogo) : new DetalhesCatalogoDto(new Catalogo("", "", 0, "", 0));
         }
 
         public IEnumerable<DetalhesCatalogoDto> ObterTodos()
@@ -61,3 +61,4 @@ namespace Library.src.Repositories
         }
     }
 }
+

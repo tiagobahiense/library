@@ -17,7 +17,7 @@ namespace Library.src.Repositories
 
         public Emprestimo ObterPorId(int id)
         {
-            return _context.Set<Emprestimo>().Find(id);
+            return _context.Set<Emprestimo>().Find(id) ?? new Emprestimo(0, 0, DateTime.Now, DateTime.Now);
         }
 
         public IEnumerable<Emprestimo> ObterTodos()
