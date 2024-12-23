@@ -3,5 +3,4 @@ C:\Users\Tiago\library\obj\Debug\net8.0\library.GeneratedMSBuildEditorConfig.edi
 C:\Users\Tiago\library\obj\Debug\net8.0\library.AssemblyInfoInputs.cache
 C:\Users\Tiago\library\obj\Debug\net8.0\library.AssemblyInfo.cs
 C:\Users\Tiago\library\obj\Debug\net8.0\library.csproj.CoreCompileInputs.cache
-C:\Users\Tiago\library\obj\Debug\net8.0\library.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Tiago\library\obj\Debug\net8.0\library.sourcelink.json

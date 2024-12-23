@@ -1,7 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
 
 namespace Library.src.Models
 {
@@ -48,40 +47,19 @@ namespace Library.src.Models
         public string Telefone
         {
             get { return _telefone; }
-            set
-            {
-                if (value.Length != 11 || !value.All(char.IsDigit))
-                {
-                    throw new ArgumentException("Número de telefone inválido.");
-                }
-                _telefone = value;
-            }
+            set { _telefone = value; }
         }
 
         public string Email
         {
             get { return _email; }
-            set
-            {
-                if (!value.Contains("@"))
-                {
-                    throw new ArgumentException("Endereço de email inválido.");
-                }
-                _email = value;
-            }
+            set { _email = value; }
         }
 
         public DateTime DataNascimento
         {
             get { return _dataNascimento; }
-            set
-            {
-                if (value > DateTime.Now)
-                {
-                    throw new ArgumentException("Data não pode ser futura.");
-                }
-                _dataNascimento = value;
-            }
+            set { _dataNascimento = value; }
         }
 
         public string CPF

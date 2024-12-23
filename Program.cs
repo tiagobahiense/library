@@ -3,10 +3,10 @@ using Library.src.Service.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using Library.UI;
+using Library.src.UI;
 using Library.src.Data;
 
-namespace LibraryApp
+namespace Library
 {
     class Program
     {
@@ -24,7 +24,7 @@ namespace LibraryApp
         private static void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<LibraryContext>(options =>
-                options.UseMySql("Server=mysql_oracle;Database=Livraria;User=root;Password=Nicknick@1;",
+                options.UseMySql("Server=mysql_oracle;Database=Library;User=root;Password=@@",
                     new MySqlServerVersion(new Version(8, 0, 21))));
             services.AddTransient<IClienteService, ClienteService>();
             services.AddTransient<ICatalogoService, CatalogoService>();

@@ -6,7 +6,7 @@ using Library.src.Service.Interfaces;
 using System;
 using System.Collections.Generic;
 
-namespace LibraryApp.UI
+namespace Library.src.UI
 {
     public class Menu
     {
@@ -33,24 +33,23 @@ namespace LibraryApp.UI
                 Console.WriteLine("3. Gerenciar Inventário");
                 Console.WriteLine("4. Gerenciar Empréstimos");
                 Console.WriteLine("5. Sair");
-                Console.Write("Escolha uma opção: ");
-                string choice = Console.ReadLine();
+                int choice = ReadInt("Escolha uma opção: ");
 
                 switch (choice)
                 {
-                    case "1":
+                    case 1:
                         GerenciarClientes();
                         break;
-                    case "2":
+                    case 2:
                         GerenciarCatalogos();
                         break;
-                    case "3":
+                    case 3:
                         GerenciarInventario();
                         break;
-                    case "4":
+                    case 4:
                         GerenciarEmprestimos();
                         break;
-                    case "5":
+                    case 5:
                         return;
                     default:
                         Console.WriteLine("Opção inválida. Tente novamente.");
@@ -67,26 +66,21 @@ namespace LibraryApp.UI
                 Console.WriteLine("1. Cadastrar Cliente");
                 Console.WriteLine("2. Atualizar Cliente");
                 Console.WriteLine("3. Obter Cliente por ID");
-                Console.WriteLine("4. Obter Empréstimos do Cliente");
-                Console.WriteLine("5. Voltar");
-                Console.Write("Escolha uma opção: ");
-                string choice = Console.ReadLine();
+                Console.WriteLine("4. Voltar");
+                int choice = ReadInt("Escolha uma opção: ");
 
                 switch (choice)
                 {
-                    case "1":
+                    case 1:
                         CadastrarCliente();
                         break;
-                    case "2":
+                    case 2:
                         AtualizarCliente();
                         break;
-                    case "3":
+                    case 3:
                         ObterClientePorId();
                         break;
-                    case "4":
-                        ObterEmprestimosDoCliente();
-                        break;
-                    case "5":
+                    case 4:
                         return;
                     default:
                         Console.WriteLine("Opção inválida. Tente novamente.");
@@ -97,18 +91,12 @@ namespace LibraryApp.UI
 
         private void CadastrarCliente()
         {
-            Console.Write("Nome: ");
-            string nome = Console.ReadLine();
-            Console.Write("Endereço: ");
-            string endereco = Console.ReadLine();
-            Console.Write("Telefone: ");
-            string telefone = Console.ReadLine();
-            Console.Write("Email: ");
-            string email = Console.ReadLine();
-            Console.Write("Data de Nascimento (YYYY-MM-DD): ");
-            DateTime dataNascimento = DateTime.Parse(Console.ReadLine());
-            Console.Write("CPF: ");
-            string cpf = Console.ReadLine();
+            string nome = ReadString("Nome: ");
+            string endereco = ReadString("Endereço: ");
+            string telefone = ReadString("Telefone: ");
+            string email = ReadString("Email: ");
+            DateTime dataNascimento = ReadDateTime("Data de Nascimento (YYYY-MM-DD): ");
+            string cpf = ReadString("CPF: ");
 
             var clienteDto = new CadastrarClienteDto(nome, endereco, telefone, email, dataNascimento, cpf);
             _clienteService.CadastrarCliente(clienteDto);
@@ -117,20 +105,13 @@ namespace LibraryApp.UI
 
         private void AtualizarCliente()
         {
-            Console.Write("ID do Cliente: ");
-            int clienteId = int.Parse(Console.ReadLine());
-            Console.Write("Nome: ");
-            string nome = Console.ReadLine();
-            Console.Write("Endereço: ");
-            string endereco = Console.ReadLine();
-            Console.Write("Telefone: ");
-            string telefone = Console.ReadLine();
-            Console.Write("Email: ");
-            string email = Console.ReadLine();
-            Console.Write("Data de Nascimento (YYYY-MM-DD): ");
-            DateTime dataNascimento = DateTime.Parse(Console.ReadLine());
-            Console.Write("CPF: ");
-            string cpf = Console.ReadLine();
+            int clienteId = ReadInt("ID do Cliente: ");
+            string nome = ReadString("Nome: ");
+            string endereco = ReadString("Endereço: ");
+            string telefone = ReadString("Telefone: ");
+            string email = ReadString("Email: ");
+            DateTime dataNascimento = ReadDateTime("Data de Nascimento (YYYY-MM-DD): ");
+            string cpf = ReadString("CPF: ");
 
             var clienteDto = new AtualizarClienteDto(nome, endereco, telefone, email, dataNascimento, cpf);
             _clienteService.AtualizarCliente(clienteId, clienteDto);
@@ -139,21 +120,14 @@ namespace LibraryApp.UI
 
         private void ObterClientePorId()
         {
-            Console.Write("ID do Cliente: ");
-            int clienteId = int.Parse(Console.ReadLine());
+            int clienteId = ReadInt("ID do Cliente: ");
             var cliente = _clienteService.ObterClientePorId(clienteId);
-            Console.WriteLine($"Cliente: {cliente.Nome}, Endereço: {cliente.Endereco}, Telefone: {cliente.Telefone}, Email: {cliente.Email}, Data de Nascimento: {cliente.DataNascimento}, CPF: {cliente.CPF}");
-        }
-
-        private void ObterEmprestimosDoCliente()
-        {
-            Console.Write("ID do Cliente: ");
-            int clienteId = int.Parse(Console.ReadLine());
-            var emprestimos = _clienteService.ObterEmprestimosDoCliente(clienteId);
-            foreach (var emprestimo in emprestimos)
+            if (cliente == null)
             {
-                Console.WriteLine($"Emprestimo ID: {emprestimo.Id}, Data de Emprestimo: {emprestimo.DataEmprestimo}, Data de Devolução: {emprestimo.DataDevolucao}");
+                Console.WriteLine("Cliente não encontrado.");
+                return;
             }
+            Console.WriteLine($"Cliente: {cliente.Nome}, Endereço: {cliente.Endereco}, Telefone: {cliente.Telefone}, Email: {cliente.Email}, Data de Nascimento: {cliente.DataNascimento}, CPF: {cliente.CPF}");
         }
 
         private void GerenciarCatalogos()
@@ -164,26 +138,21 @@ namespace LibraryApp.UI
                 Console.WriteLine("1. Adicionar Catálogo");
                 Console.WriteLine("2. Remover Catálogo");
                 Console.WriteLine("3. Buscar Catálogo por ID");
-                Console.WriteLine("4. Buscar Todos os Catálogos");
-                Console.WriteLine("5. Voltar");
-                Console.Write("Escolha uma opção: ");
-                string choice = Console.ReadLine();
+                Console.WriteLine("4. Voltar");
+                int choice = ReadInt("Escolha uma opção: ");
 
                 switch (choice)
                 {
-                    case "1":
+                    case 1:
                         AdicionarCatalogo();
                         break;
-                    case "2":
+                    case 2:
                         RemoverCatalogo();
                         break;
-                    case "3":
+                    case 3:
                         BuscarCatalogoPorId();
                         break;
-                    case "4":
-                        BuscarTodosOsCatalogos();
-                        break;
-                    case "5":
+                    case 4:
                         return;
                     default:
                         Console.WriteLine("Opção inválida. Tente novamente.");
@@ -194,16 +163,11 @@ namespace LibraryApp.UI
 
         private void AdicionarCatalogo()
         {
-            Console.Write("Título: ");
-            string titulo = Console.ReadLine();
-            Console.Write("Autor: ");
-            string autor = Console.ReadLine();
-            Console.Write("Ano de Lançamento: ");
-            int anoLancamento = int.Parse(Console.ReadLine());
-            Console.Write("Gênero: ");
-            string genero = Console.ReadLine();
-            Console.Write("Número de Páginas: ");
-            int numeroPaginas = int.Parse(Console.ReadLine());
+            string titulo = ReadString("Título: ");
+            string autor = ReadString("Autor: ");
+            int anoLancamento = ReadInt("Ano de Lançamento: ");
+            string genero = ReadString("Gênero: ");
+            int numeroPaginas = ReadInt("Número de Páginas: ");
 
             var catalogoDto = new CadastrarCatalogoDto(titulo, autor, anoLancamento, genero, numeroPaginas);
             _catalogoService.AdicionarCatalogo(catalogoDto);
@@ -212,27 +176,21 @@ namespace LibraryApp.UI
 
         private void RemoverCatalogo()
         {
-            Console.Write("ID do Catálogo: ");
-            int catalogoId = int.Parse(Console.ReadLine());
+            int catalogoId = ReadInt("ID do Catálogo: ");
             _catalogoService.RemoverCatalogo(catalogoId);
             Console.WriteLine("Catálogo removido com sucesso!");
         }
 
         private void BuscarCatalogoPorId()
         {
-            Console.Write("ID do Catálogo: ");
-            int catalogoId = int.Parse(Console.ReadLine());
+            int catalogoId = ReadInt("ID do Catálogo: ");
             var catalogo = _catalogoService.BuscarCatalogoPorId(catalogoId);
-            Console.WriteLine($"Catálogo: {catalogo.Titulo}, Autor: {catalogo.Autor}, Ano de Lançamento: {catalogo.AnoLancamento}, Gênero: {catalogo.Genero}, Número de Páginas: {catalogo.NumeroPaginas}");
-        }
-
-        private void BuscarTodosOsCatalogos()
-        {
-            var catalogos = _catalogoService.BuscarTodosOsCatalogos();
-            foreach (var catalogo in catalogos)
+            if (catalogo == null)
             {
-                Console.WriteLine($"Catálogo: {catalogo.Titulo}, Autor: {catalogo.Autor}, Ano de Lançamento: {catalogo.AnoLancamento}, Gênero: {catalogo.Genero}, Número de Páginas: {catalogo.NumeroPaginas}");
+                Console.WriteLine("Catálogo não encontrado.");
+                return;
             }
+            Console.WriteLine($"Catálogo: {catalogo.Titulo}, Autor: {catalogo.Autor}, Ano de Lançamento: {catalogo.AnoLancamento}, Gênero: {catalogo.Genero}, Número de Páginas: {catalogo.NumeroPaginas}");
         }
 
         private void GerenciarInventario()
@@ -242,27 +200,22 @@ namespace LibraryApp.UI
                 Console.WriteLine("Gerenciar Inventário:");
                 Console.WriteLine("1. Adicionar Catálogo ao Inventário");
                 Console.WriteLine("2. Remover Catálogo do Inventário");
-                Console.WriteLine("3. Obter Detalhes do Catálogo no Inventário");
-                Console.WriteLine("4. Obter Quantidade do Catálogo no Inventário");
-                Console.WriteLine("5. Voltar");
-                Console.Write("Escolha uma opção: ");
-                string choice = Console.ReadLine();
+                Console.WriteLine("3. Obter Quantidade do Catálogo no Inventário");
+                Console.WriteLine("4. Voltar");
+                int choice = ReadInt("Escolha uma opção: ");
 
                 switch (choice)
                 {
-                    case "1":
+                    case 1:
                         AdicionarCatalogoAoInventario();
                         break;
-                    case "2":
+                    case 2:
                         RemoverCatalogoDoInventario();
                         break;
-                    case "3":
-                        ObterDetalhesCatalogoNoInventario();
-                        break;
-                    case "4":
+                    case 3:
                         ObterQuantidadeCatalogoNoInventario();
                         break;
-                    case "5":
+                    case 4:
                         return;
                     default:
                         Console.WriteLine("Opção inválida. Tente novamente.");
@@ -273,12 +226,9 @@ namespace LibraryApp.UI
 
         private void AdicionarCatalogoAoInventario()
         {
-            Console.Write("ID do Inventário: ");
-            int inventarioId = int.Parse(Console.ReadLine());
-            Console.Write("ID do Catálogo: ");
-            int catalogoId = int.Parse(Console.ReadLine());
-            Console.Write("Quantidade: ");
-            int quantidade = int.Parse(Console.ReadLine());
+            int inventarioId = ReadInt("ID do Inventário: ");
+            int catalogoId = ReadInt("ID do Catálogo: ");
+            int quantidade = ReadInt("Quantidade: ");
 
             var adicionarDto = new CadastrarInventarioDto(new Dictionary<int, int> { { catalogoId, quantidade } });
             _inventarioService.AdicionarCatalogoAoInventario(inventarioId, adicionarDto);
@@ -287,32 +237,19 @@ namespace LibraryApp.UI
 
         private void RemoverCatalogoDoInventario()
         {
-            Console.Write("ID do Inventário: ");
-            int inventarioId = int.Parse(Console.ReadLine());
-            Console.Write("ID do Catálogo: ");
-            int catalogoId = int.Parse(Console.ReadLine());
-            Console.Write("Quantidade: ");
-            int quantidade = int.Parse(Console.ReadLine());
+            int inventarioId = ReadInt("ID do Inventário: ");
+            int catalogoId = ReadInt("ID do Catálogo: ");
+            int quantidade = ReadInt("Quantidade: ");
 
             var removerDto = new AtualizarInventarioDto(new Dictionary<int, int> { { catalogoId, quantidade } });
             _inventarioService.RemoverCatalogoDoInventario(inventarioId, removerDto);
             Console.WriteLine("Catálogo removido do inventário com sucesso!");
         }
 
-        private void ObterDetalhesCatalogoNoInventario()
-        {
-            Console.Write("ID do Catálogo: ");
-            int catalogoId = int.Parse(Console.ReadLine());
-            var catalogo = _inventarioService.ObterDetalhesCatalogoNoInventario(catalogoId);
-            Console.WriteLine($"Catálogo: {catalogo.Titulo}, Autor: {catalogo.Autor}, Ano de Lançamento: {catalogo.AnoLancamento}, Gênero: {catalogo.Genero}, Número de Páginas: {catalogo.NumeroPaginas}");
-        }
-
         private void ObterQuantidadeCatalogoNoInventario()
         {
-            Console.Write("ID do Inventário: ");
-            int inventarioId = int.Parse(Console.ReadLine());
-            Console.Write("ID do Catálogo: ");
-            int catalogoId = int.Parse(Console.ReadLine());
+            int inventarioId = ReadInt("ID do Inventário: ");
+            int catalogoId = ReadInt("ID do Catálogo: ");
             int quantidade = _inventarioService.QuantidadeCatalogoNoInventario(inventarioId, catalogoId);
             Console.WriteLine($"Quantidade do Catálogo no Inventário: {quantidade}");
         }
@@ -326,21 +263,20 @@ namespace LibraryApp.UI
                 Console.WriteLine("2. Devolver Empréstimo");
                 Console.WriteLine("3. Obter Empréstimos do Cliente");
                 Console.WriteLine("4. Voltar");
-                Console.Write("Escolha uma opção: ");
-                string choice = Console.ReadLine();
+                int choice = ReadInt("Escolha uma opção: ");
 
                 switch (choice)
                 {
-                    case "1":
+                    case 1:
                         RegistrarEmprestimo();
                         break;
-                    case "2":
+                    case 2:
                         DevolverEmprestimo();
                         break;
-                    case "3":
+                    case 3:
                         ObterEmprestimosDoClientePorMenu();
                         break;
-                    case "4":
+                    case 4:
                         return;
                     default:
                         Console.WriteLine("Opção inválida. Tente novamente.");
@@ -351,23 +287,18 @@ namespace LibraryApp.UI
 
         private void RegistrarEmprestimo()
         {
-            Console.Write("ID do Cliente: ");
-            int clienteId = int.Parse(Console.ReadLine());
+            int clienteId = ReadInt("ID do Cliente: ");
             var emprestimos = new List<CadastrarEmprestimoDto>();
 
             while (true)
             {
-                Console.Write("ID do Inventário: ");
-                int idInventario = int.Parse(Console.ReadLine());
-                Console.Write("Data de Emprestimo (YYYY-MM-DD): ");
-                DateTime dataEmprestimo = DateTime.Parse(Console.ReadLine());
+                int idInventario = ReadInt("ID do Inventário: ");
+                DateTime dataEmprestimo = ReadDateTime("Data de Emprestimo (YYYY-MM-DD): ");
 
                 var emprestimoDto = new CadastrarEmprestimoDto { IdInventario = idInventario, DataEmprestimo = dataEmprestimo };
                 emprestimos.Add(emprestimoDto);
 
-                Console.Write("Deseja adicionar mais empréstimos? (s/n): ");
-                string choice = Console.ReadLine();
-                if (choice.ToLower() != "s")
+                if (!ReadBool("Deseja adicionar mais empréstimos? (s/n): "))
                 {
                     break;
                 }
@@ -379,23 +310,18 @@ namespace LibraryApp.UI
 
         private void DevolverEmprestimo()
         {
-            Console.Write("ID do Cliente: ");
-            int clienteId = int.Parse(Console.ReadLine());
+            int clienteId = ReadInt("ID do Cliente: ");
             var devolucoes = new List<DevolucaoEmprestimoDto>();
 
             while (true)
             {
-                Console.Write("ID do Empréstimo: ");
-                int emprestimoId = int.Parse(Console.ReadLine());
-                Console.Write("Data de Devolução (YYYY-MM-DD): ");
-                DateTime dataDevolucao = DateTime.Parse(Console.ReadLine());
+                int emprestimoId = ReadInt("ID do Empréstimo: ");
+                DateTime dataDevolucao = ReadDateTime("Data de Devolução (YYYY-MM-DD): ");
 
                 var devolucaoDto = new DevolucaoEmprestimoDto { EmprestimoId = emprestimoId, DataDevolucao = dataDevolucao };
                 devolucoes.Add(devolucaoDto);
 
-                Console.Write("Deseja adicionar mais devoluções? (s/n): ");
-                string choice = Console.ReadLine();
-                if (choice.ToLower() != "s")
+                if (!ReadBool("Deseja adicionar mais devoluções? (s/n): "))
                 {
                     break;
                 }
@@ -407,12 +333,63 @@ namespace LibraryApp.UI
 
         private void ObterEmprestimosDoClientePorMenu()
         {
-            Console.Write("ID do Cliente: ");
-            int clienteId = int.Parse(Console.ReadLine());
+            int clienteId = ReadInt("ID do Cliente: ");
             var emprestimos = _emprestimoService.ObterEmprestimosDoCliente(clienteId);
             foreach (var emprestimo in emprestimos)
             {
                 Console.WriteLine($"Emprestimo ID: {emprestimo.Id}, Data de Emprestimo: {emprestimo.DataEmprestimo}, Data de Devolução: {emprestimo.DataDevolucao}");
+            }
+        }
+
+        private int ReadInt(string prompt)
+        {
+            while (true)
+            {
+                Console.Write(prompt);
+                string? input = Console.ReadLine();
+                if (int.TryParse(input, out int result))
+                {
+                    return result;
+                }
+                Console.WriteLine("Entrada inválida. Tente novamente.");
+            }
+        }
+
+        private DateTime ReadDateTime(string prompt)
+        {
+            while (true)
+            {
+                Console.Write(prompt);
+                string? input = Console.ReadLine();
+                if (DateTime.TryParse(input, out DateTime result))
+                {
+                    return result;
+                }
+                Console.WriteLine("Data inválida. Tente novamente.");
+            }
+        }
+
+        private string ReadString(string prompt)
+        {
+            Console.Write(prompt);
+            return Console.ReadLine() ?? string.Empty;
+        }
+
+        private bool ReadBool(string prompt)
+        {
+            while (true)
+            {
+                Console.Write(prompt);
+                string? input = Console.ReadLine();
+                if (input?.ToLower() == "s")
+                {
+                    return true;
+                }
+                else if (input?.ToLower() == "n")
+                {
+                    return false;
+                }
+                Console.WriteLine("Entrada inválida. Tente novamente.");
             }
         }
     }
