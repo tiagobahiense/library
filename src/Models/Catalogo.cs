@@ -1,3 +1,7 @@
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace Library.src.Models
 {
     public class Catalogo
@@ -9,9 +13,8 @@ namespace Library.src.Models
         private string _genero;
         private int _numeroPaginas;
 
-        public Catalogo(int idCatalogo, string titulo, string autor, int anoLancamento, string genero, int numeroPaginas)
+        public Catalogo(string titulo, string autor, int anoLancamento, string genero, int numeroPaginas)
         {
-            _idCatalogo = idCatalogo;
             _titulo = titulo;
             _autor = autor;
             _anoLancamento = anoLancamento;
@@ -19,6 +22,8 @@ namespace Library.src.Models
             _numeroPaginas = numeroPaginas;
         }
 
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdCatalogo
         {
             get { return _idCatalogo; }
@@ -28,13 +33,13 @@ namespace Library.src.Models
         public string Titulo
         {
             get { return _titulo; }
-            set { _titulo = value; }  
+            set { _titulo = value; }
         }
 
         public string Autor
         {
             get { return _autor; }
-            set { _autor = value; }  
+            set { _autor = value; }
         }
 
         public int AnoLancamento
@@ -58,13 +63,13 @@ namespace Library.src.Models
         public string Genero
         {
             get { return _genero; }
-            set { _genero = value; } 
+            set { _genero = value; }
         }
 
         public int NumeroPaginas
         {
             get { return _numeroPaginas; }
-            set { _numeroPaginas = value; } 
+            set { _numeroPaginas = value; }
         }
     }
 }

@@ -1,3 +1,8 @@
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+
 namespace Library.src.Models
 {
     public class Cliente
@@ -10,9 +15,8 @@ namespace Library.src.Models
         private DateTime _dataNascimento;
         private string _cpf;
 
-        public Cliente(int id, string nome, string endereco, string telefone, string email, DateTime dataNascimento, string cpf)
+        public Cliente(string nome, string endereco, string telefone, string email, DateTime dataNascimento, string cpf)
         {
-            _id = id;
             _nome = nome;
             _endereco = endereco;
             _telefone = telefone;
@@ -21,6 +25,8 @@ namespace Library.src.Models
             _cpf = cpf;
         }
 
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id
         {
             get { return _id; }
