@@ -16,31 +16,16 @@ namespace Library.src.Repositories
             _context = context;
         }
 
-        public DetalhesCatalogoDto ObterPorId(int id)
-        {
-            var catalogo = _context.Set<Catalogo>().Find(id);
-            if (catalogo != null)
-            {
-                return new DetalhesCatalogoDto(catalogo);
-            }
-            throw new KeyNotFoundException($"Catalogo com ID {id} não encontrado.");
-        }
-
-        public IEnumerable<DetalhesCatalogoDto> ObterTodos()
-        {
-            return _context.Set<Catalogo>().Select(c => new DetalhesCatalogoDto(c)).ToList();
-        }
-
         public void Adicionar(CadastrarCatalogoDto catalogoDto)
         {
-            var catalogo = catalogoDto.ToCatalogo(0);
+            var catalogo = catalogoDto.ToCatalogo();
             _context.Set<Catalogo>().Add(catalogo);
             _context.SaveChanges();
         }
 
         public void Atualizar(AtualizarCatalogoDto catalogoDto, int id)
         {
-            var catalogo = _context.Set<Catalogo>().Find(id);
+            var catalogo = ObterPorId(id)?.ToCatalogo();
             if (catalogo != null)
             {
                 catalogo.Titulo = catalogoDto.Titulo;
@@ -53,9 +38,21 @@ namespace Library.src.Repositories
             }
         }
 
-        public void Remover(int id)
+        public DetalhesCatalogoDto ObterPorId(int id)
         {
             var catalogo = _context.Set<Catalogo>().Find(id);
+            return catalogo != null ? new DetalhesCatalogoDto(catalogo) : null;
+        }
+
+        public IEnumerable<DetalhesCatalogoDto> ObterTodos()
+        {
+            var catalogos = _context.Set<Catalogo>().ToList();
+            return catalogos.Select(c => new DetalhesCatalogoDto(c));
+        }
+
+        public void Remover(int id)
+        {
+            var catalogo = ObterPorId(id)?.ToCatalogo();
             if (catalogo != null)
             {
                 _context.Set<Catalogo>().Remove(catalogo);

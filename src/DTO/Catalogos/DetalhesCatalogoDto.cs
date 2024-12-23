@@ -4,7 +4,7 @@ namespace Library.src.DTO.Catalogos
 {
     public class DetalhesCatalogoDto
     {
-        public int Id { get; }
+        public int IdCatalogo { get; }
         public string Titulo { get; }
         public string Autor { get; }
         public int AnoLancamento { get; }
@@ -13,12 +13,20 @@ namespace Library.src.DTO.Catalogos
 
         public DetalhesCatalogoDto(Catalogo catalogo)
         {
-            Id = catalogo.Id;
+            IdCatalogo = catalogo.IdCatalogo;
             Titulo = catalogo.Titulo;
             Autor = catalogo.Autor;
             AnoLancamento = catalogo.AnoLancamento;
             Genero = catalogo.Genero;
             NumeroPaginas = catalogo.NumeroPaginas;
+        }
+
+        public Catalogo ToCatalogo()
+        {
+            return new Catalogo(Titulo, Autor, AnoLancamento, Genero, NumeroPaginas)
+            {
+                IdCatalogo = IdCatalogo
+            };
         }
     }
 }

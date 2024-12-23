@@ -1,5 +1,4 @@
 using Library.src.Models;
-using System;
 
 namespace Library.src.DTO.Emprestimos
 {
@@ -21,4 +20,3 @@ namespace Library.src.DTO.Emprestimos
         }
     }
 }
-

@@ -6,7 +6,7 @@ using System;
 using Library.src.UI;
 using Library.src.Data;
 
-namespace Library
+namespace LibraryApp
 {
     class Program
     {
@@ -18,13 +18,13 @@ namespace Library
             var serviceProvider = serviceCollection.BuildServiceProvider();
 
             var menu = serviceProvider.GetService<Menu>();
-            menu.Run();
+            menu?.Run();
         }
 
         private static void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<LibraryContext>(options =>
-                options.UseMySql("Server=mysql_oracle;Database=Library;User=root;Password=@@",
+                options.UseMySql("Server=your_server;Database=mysql_oracle;User=your_username;Password=your_password;",
                     new MySqlServerVersion(new Version(8, 0, 21))));
             services.AddTransient<IClienteService, ClienteService>();
             services.AddTransient<ICatalogoService, CatalogoService>();

@@ -19,23 +19,12 @@ namespace Library.src.Service
 
         public void CadastrarCliente(CadastrarClienteDto clienteDto)
         {
-            var cliente = clienteDto.ToCliente();
-            _clienteRepository.Adicionar(cliente);
+            _clienteRepository.Adicionar(clienteDto);
         }
 
         public void AtualizarCliente(int clienteId, AtualizarClienteDto clienteDto)
         {
-            var cliente = _clienteRepository.ObterPorId(clienteId);
-            if (cliente != null)
-            {
-                cliente.Nome = clienteDto.Nome;
-                cliente.Endereco = clienteDto.Endereco;
-                cliente.Telefone = clienteDto.Telefone;
-                cliente.Email = clienteDto.Email;
-                cliente.DataNascimento = clienteDto.DataNascimento;
-                cliente.CPF = clienteDto.CPF;
-                _clienteRepository.Atualizar(cliente);
-            }
+            _clienteRepository.Atualizar(clienteDto, clienteId);
         }
 
         public DetalhesClienteDto ObterClientePorId(int clienteId)

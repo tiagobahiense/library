@@ -39,7 +39,7 @@ namespace Library.src.Repositories
 
         public void Remover(int id)
         {
-            var emprestimo = _context.Set<Emprestimo>().Find(id);
+            var emprestimo = ObterPorId(id);
             if (emprestimo != null)
             {
                 _context.Set<Emprestimo>().Remove(emprestimo);

@@ -1,4 +1,5 @@
 using Library.src.DTO.Catalogos;
+using Library.src.Models;
 using System.Collections.Generic;
 
 namespace Library.src.Repositories.Interfaces

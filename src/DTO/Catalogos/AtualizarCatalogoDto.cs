@@ -4,15 +4,24 @@ namespace Library.src.DTO.Catalogos
 {
     public class AtualizarCatalogoDto
     {
-        public string Titulo { get; set; } = string.Empty;
-        public string Autor { get; set; } = string.Empty;
+        public string Titulo { get; set; }
+        public string Autor { get; set; }
         public int AnoLancamento { get; set; }
-        public string Genero { get; set; } = string.Empty;
+        public string Genero { get; set; }
         public int NumeroPaginas { get; set; }
 
-        public Catalogo ToCatalogo(int idCatalogo)
+        public AtualizarCatalogoDto(string titulo, string autor, int anoLancamento, string genero, int numeroPaginas)
         {
-            return new Catalogo(idCatalogo, Titulo, Autor, AnoLancamento, Genero, NumeroPaginas);
+            Titulo = titulo;
+            Autor = autor;
+            AnoLancamento = anoLancamento;
+            Genero = genero;
+            NumeroPaginas = numeroPaginas;
+        }
+
+        public Catalogo ToCatalogo()
+        {
+            return new Catalogo(Titulo, Autor, AnoLancamento, Genero, NumeroPaginas);
         }
     }
 }
