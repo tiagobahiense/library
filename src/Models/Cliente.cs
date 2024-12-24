@@ -14,6 +14,15 @@ namespace Library.src.Models
         private DateTime _dataNascimento;
         private string _cpf;
 
+        public Cliente()
+        {
+            _nome = string.Empty;
+            _endereco = string.Empty;
+            _telefone = string.Empty;
+            _email = string.Empty;
+            _cpf = string.Empty;
+        }
+
         public Cliente(string nome, string endereco, string telefone, string email, DateTime dataNascimento, string cpf)
         {
             _nome = nome;

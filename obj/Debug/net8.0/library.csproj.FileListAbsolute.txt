@@ -1,9 +1,3 @@
-C:\Users\Tiago\library\obj\Debug\net8.0\library.csproj.AssemblyReference.cache
-C:\Users\Tiago\library\obj\Debug\net8.0\library.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Tiago\library\obj\Debug\net8.0\library.AssemblyInfoInputs.cache
-C:\Users\Tiago\library\obj\Debug\net8.0\library.AssemblyInfo.cs
-C:\Users\Tiago\library\obj\Debug\net8.0\library.csproj.CoreCompileInputs.cache
-C:\Users\Tiago\library\obj\Debug\net8.0\library.sourcelink.json
 C:\Users\Tiago\library\bin\Debug\net8.0\library.exe
 C:\Users\Tiago\library\bin\Debug\net8.0\library.deps.json
 C:\Users\Tiago\library\bin\Debug\net8.0\library.runtimeconfig.json
@@ -29,6 +23,12 @@ C:\Users\Tiago\library\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
 C:\Users\Tiago\library\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll
 C:\Users\Tiago\library\bin\Debug\net8.0\MySqlConnector.dll
 C:\Users\Tiago\library\bin\Debug\net8.0\Pomelo.EntityFrameworkCore.MySql.dll
+C:\Users\Tiago\library\obj\Debug\net8.0\library.csproj.AssemblyReference.cache
+C:\Users\Tiago\library\obj\Debug\net8.0\library.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Tiago\library\obj\Debug\net8.0\library.AssemblyInfoInputs.cache
+C:\Users\Tiago\library\obj\Debug\net8.0\library.AssemblyInfo.cs
+C:\Users\Tiago\library\obj\Debug\net8.0\library.csproj.CoreCompileInputs.cache
+C:\Users\Tiago\library\obj\Debug\net8.0\library.sourcelink.json
 C:\Users\Tiago\library\obj\Debug\net8.0\library.csproj.Up2Date
 C:\Users\Tiago\library\obj\Debug\net8.0\library.dll
 C:\Users\Tiago\library\obj\Debug\net8.0\refint\library.dll

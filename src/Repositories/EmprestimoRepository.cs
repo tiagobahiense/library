@@ -1,6 +1,6 @@
+using Library.src.Data;
 using Library.src.Models;
 using Library.src.Repositories.Interfaces;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,21 +8,11 @@ namespace Library.src.Repositories
 {
     public class EmprestimoRepository : IEmprestimoRepository
     {
-        private readonly DbContext _context;
+        private readonly LibraryContext _context;
 
-        public EmprestimoRepository(DbContext context)
+        public EmprestimoRepository(LibraryContext context)
         {
             _context = context;
-        }
-
-        public Emprestimo ObterPorId(int id)
-        {
-            return _context.Set<Emprestimo>().Find(id) ?? new Emprestimo(0, 0, DateTime.Now, DateTime.Now);
-        }
-
-        public IEnumerable<Emprestimo> ObterTodos()
-        {
-            return _context.Set<Emprestimo>().ToList();
         }
 
         public void Adicionar(Emprestimo emprestimo)
@@ -35,6 +25,16 @@ namespace Library.src.Repositories
         {
             _context.Set<Emprestimo>().Update(emprestimo);
             _context.SaveChanges();
+        }
+
+        public Emprestimo ObterPorId(int id)
+        {
+            return _context.Set<Emprestimo>().Find(id) ?? new Emprestimo(0, 0, DateTime.Now, DateTime.Now);
+        }
+
+        public IEnumerable<Emprestimo> ObterTodos()
+        {
+            return _context.Set<Emprestimo>().ToList();
         }
 
         public void Remover(int id)

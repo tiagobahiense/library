@@ -1,14 +1,15 @@
-using Library.src.DTO.Catalogos;
 using Library.src.DTO.Inventarios;
+using System.Collections.Generic;
 
 namespace Library.src.Service.Interfaces
 {
     public interface IInventarioService
     {
-        void AdicionarCatalogoAoInventario(int inventarioId, CadastrarInventarioDto cadastrarDto);
-        void RemoverCatalogoDoInventario(int inventarioId, AtualizarInventarioDto atualizarDto);
-        DetalhesCatalogoDto ObterDetalhesCatalogoNoInventario(int catalogoId);
-        int QuantidadeCatalogoNoInventario(int inventarioId, int catalogoId);
-        DetalhesInventarioDto ObterInventarioPorId(int inventarioId);
+        void Adicionar(CadastrarInventarioDto inventarioDto);
+        void Atualizar(AtualizarInventarioDto inventarioDto, int id);
+        DetalhesInventarioDto ObterPorId(int id);
+        IEnumerable<DetalhesInventarioDto> ObterTodos();
+        void Remover(int id);
     }
 }
+

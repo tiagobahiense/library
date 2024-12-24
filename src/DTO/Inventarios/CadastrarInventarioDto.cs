@@ -7,16 +7,9 @@ namespace Library.src.DTO.Inventarios
     {
         public Dictionary<int, int> Itens { get; set; } = new Dictionary<int, int>();
 
-        public CadastrarInventarioDto(Dictionary<int, int> itens)
+        public Inventario ToInventario()
         {
-            Itens = itens;
-        }
-
-        public Inventario ToInventario(int id)
-        {
-            return new Inventario(id, Itens);
+            return new Inventario(0, Itens);
         }
     }
 }
-
-

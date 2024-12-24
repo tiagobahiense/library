@@ -1,4 +1,3 @@
-using Library.src.DTO.Inventarios;
 using Library.src.Models;
 using System.Collections.Generic;
 
@@ -6,10 +5,10 @@ namespace Library.src.Repositories.Interfaces
 {
     public interface IInventarioRepository
     {
-        DetalhesInventarioDto ObterPorId(int id);
-        IEnumerable<DetalhesInventarioDto> ObterTodos();
-        void Adicionar(CadastrarInventarioDto inventarioDto);
+        void Adicionar(Inventario inventario);
         void Atualizar(Inventario inventario);
+        Inventario ObterPorId(int id);
+        IEnumerable<Inventario> ObterTodos();
         void Remover(int id);
     }
 }

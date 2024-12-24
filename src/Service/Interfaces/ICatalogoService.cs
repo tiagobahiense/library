@@ -5,9 +5,10 @@ namespace Library.src.Service.Interfaces
 {
     public interface ICatalogoService
     {
-        void AdicionarCatalogo(CadastrarCatalogoDto catalogoDto);
-        void RemoverCatalogo(int catalogoId);
-        DetalhesCatalogoDto BuscarCatalogoPorId(int catalogoId);
-        IEnumerable<DetalhesCatalogoDto> BuscarTodosOsCatalogos();
+        void Adicionar(CadastrarCatalogoDto catalogoDto);
+        void Atualizar(AtualizarCatalogoDto catalogoDto, int id);
+        DetalhesCatalogoDto ObterPorId(int id);
+        IEnumerable<DetalhesCatalogoDto> ObterTodos();
+        void Remover(int id);
     }
 }

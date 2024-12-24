@@ -1,7 +1,9 @@
 using Library.src.DTO.Catalogos;
+using Library.src.Models;
 using Library.src.Repositories.Interfaces;
 using Library.src.Service.Interfaces;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Library.src.Service
 {
@@ -14,24 +16,34 @@ namespace Library.src.Service
             _catalogoRepository = catalogoRepository;
         }
 
-        public void AdicionarCatalogo(CadastrarCatalogoDto catalogoDto)
+        public void Adicionar(CadastrarCatalogoDto catalogoDto)
         {
-            _catalogoRepository.Adicionar(catalogoDto);
+            var catalogo = catalogoDto.ToCatalogo();
+            _catalogoRepository.Adicionar(catalogo);
         }
 
-        public void RemoverCatalogo(int catalogoId)
+        public void Atualizar(AtualizarCatalogoDto catalogoDto, int id)
         {
-            _catalogoRepository.Remover(catalogoId);
+            var catalogo = catalogoDto.ToCatalogo();
+            catalogo.IdCatalogo = id;
+            _catalogoRepository.Atualizar(catalogo);
         }
 
-        public DetalhesCatalogoDto BuscarCatalogoPorId(int catalogoId)
+        public DetalhesCatalogoDto ObterPorId(int id)
         {
-            return _catalogoRepository.ObterPorId(catalogoId);
+            var catalogo = _catalogoRepository.ObterPorId(id);
+            return catalogo.ToDetalhesCatalogoDto();
         }
 
-        public IEnumerable<DetalhesCatalogoDto> BuscarTodosOsCatalogos()
+        public IEnumerable<DetalhesCatalogoDto> ObterTodos()
         {
-            return _catalogoRepository.ObterTodos();
+            var catalogos = _catalogoRepository.ObterTodos();
+            return catalogos.Select(c => c.ToDetalhesCatalogoDto()).ToList();
+        }
+
+        public void Remover(int id)
+        {
+            _catalogoRepository.Remover(id);
         }
     }
 }

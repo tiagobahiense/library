@@ -10,9 +10,8 @@ namespace Library.src.Data
         public DbSet<Catalogo> Catalogos { get; set; }
         public DbSet<Inventario> Inventarios { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public LibraryContext(DbContextOptions<LibraryContext> options) : base(options)
         {
-            optionsBuilder.UseMySql("Server=your_server;Database=mysql_oracle;User=your_username;Password=your_password;", new MySqlServerVersion(new Version(8, 0, 21)));
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

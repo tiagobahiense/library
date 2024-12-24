@@ -1,7 +1,6 @@
-using Library.src.DTO.Catalogos;
+using Library.src.Data;
 using Library.src.Models;
 using Library.src.Repositories.Interfaces;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,50 +8,38 @@ namespace Library.src.Repositories
 {
     public class CatalogoRepository : ICatalogoRepository
     {
-        private readonly DbContext _context;
+        private readonly LibraryContext _context;
 
-        public CatalogoRepository(DbContext context)
+        public CatalogoRepository(LibraryContext context)
         {
             _context = context;
         }
 
-        public void Adicionar(CadastrarCatalogoDto catalogoDto)
+        public void Adicionar(Catalogo catalogo)
         {
-            var catalogo = catalogoDto.ToCatalogo();
             _context.Set<Catalogo>().Add(catalogo);
             _context.SaveChanges();
         }
 
-        public void Atualizar(AtualizarCatalogoDto catalogoDto, int id)
+        public void Atualizar(Catalogo catalogo)
         {
-            var catalogo = ObterPorId(id)?.ToCatalogo();
-            if (catalogo != null)
-            {
-                catalogo.Titulo = catalogoDto.Titulo;
-                catalogo.Autor = catalogoDto.Autor;
-                catalogo.AnoLancamento = catalogoDto.AnoLancamento;
-                catalogo.Genero = catalogoDto.Genero;
-                catalogo.NumeroPaginas = catalogoDto.NumeroPaginas;
-                _context.Set<Catalogo>().Update(catalogo);
-                _context.SaveChanges();
-            }
+            _context.Set<Catalogo>().Update(catalogo);
+            _context.SaveChanges();
         }
 
-        public DetalhesCatalogoDto ObterPorId(int id)
+        public Catalogo ObterPorId(int id)
         {
-            var catalogo = _context.Set<Catalogo>().Find(id);
-            return catalogo != null ? new DetalhesCatalogoDto(catalogo) : new DetalhesCatalogoDto(new Catalogo("", "", 0, "", 0));
+            return _context.Set<Catalogo>().Find(id) ?? new Catalogo("", "", 0, "", 0);
         }
 
-        public IEnumerable<DetalhesCatalogoDto> ObterTodos()
+        public IEnumerable<Catalogo> ObterTodos()
         {
-            var catalogos = _context.Set<Catalogo>().ToList();
-            return catalogos.Select(c => new DetalhesCatalogoDto(c));
+            return _context.Set<Catalogo>().ToList();
         }
 
         public void Remover(int id)
         {
-            var catalogo = ObterPorId(id)?.ToCatalogo();
+            var catalogo = ObterPorId(id);
             if (catalogo != null)
             {
                 _context.Set<Catalogo>().Remove(catalogo);
@@ -61,4 +48,3 @@ namespace Library.src.Repositories
         }
     }
 }
-

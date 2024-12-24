@@ -1,7 +1,7 @@
+using Library.src.Data; 
 using Library.src.DTO.Clientes;
 using Library.src.Models;
 using Library.src.Repositories.Interfaces;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,9 +9,9 @@ namespace Library.src.Repositories
 {
     public class ClienteRepository : IClienteRepository
     {
-        private readonly DbContext _context;
+        private readonly LibraryContext _context;
 
-        public ClienteRepository(DbContext context)
+        public ClienteRepository(LibraryContext context)
         {
             _context = context;
         }
@@ -41,7 +41,7 @@ namespace Library.src.Repositories
 
         public Cliente ObterPorId(int id)
         {
-            return _context.Set<Cliente>().Find(id) ?? new Cliente("", "", "", "", DateTime.Now, "");
+            return _context.Set<Cliente>().Find(id) ?? new Cliente();
         }
 
         public IEnumerable<Cliente> ObterTodos()

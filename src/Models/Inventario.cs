@@ -6,27 +6,33 @@ namespace Library.src.Models
 {
     public class Inventario
     {
+        private int _id;
         private Dictionary<int, int> _itens;
-        private int _idInventario;
+
+        public Inventario()
+        {
+            _itens = new Dictionary<int, int>();
+        }
 
         public Inventario(int id, Dictionary<int, int> itens)
         {
-            _idInventario = id;
-            _itens = itens ?? new Dictionary<int, int>();
+            _id = id;
+            _itens = itens;
         }
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id
         {
-            get { return _idInventario; }
-            set { _idInventario = value; }
+            get { return _id; }
+            private set { _id = value; }
         }
 
+        [NotMapped]
         public Dictionary<int, int> Itens
         {
             get { return _itens; }
-            set { _itens = value ?? new Dictionary<int, int>(); }
+            set { _itens = value; }
         }
     }
 }

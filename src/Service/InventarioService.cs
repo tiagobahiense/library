@@ -1,8 +1,8 @@
-using Library.src.DTO.Catalogos;
 using Library.src.DTO.Inventarios;
 using Library.src.Models;
 using Library.src.Repositories.Interfaces;
 using Library.src.Service.Interfaces;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Library.src.Service
@@ -10,71 +10,39 @@ namespace Library.src.Service
     public class InventarioService : IInventarioService
     {
         private readonly IInventarioRepository _inventarioRepository;
-        private readonly ICatalogoRepository _catalogoRepository;
 
-        public InventarioService(IInventarioRepository inventarioRepository, ICatalogoRepository catalogoRepository)
+        public InventarioService(IInventarioRepository inventarioRepository)
         {
             _inventarioRepository = inventarioRepository;
-            _catalogoRepository = catalogoRepository;
         }
 
-        public void AdicionarCatalogoAoInventario(int inventarioId, CadastrarInventarioDto cadastrarDto)
+        public void Adicionar(CadastrarInventarioDto inventarioDto)
         {
-            var inventario = _inventarioRepository.ObterPorId(inventarioId);
-            if (inventario != null)
-            {
-                foreach (var item in cadastrarDto.Itens)
-                {
-                    if (inventario.Itens.ContainsKey(item.Key))
-                    {
-                        inventario.Itens[item.Key] += item.Value;
-                    }
-                    else
-                    {
-                        inventario.Itens[item.Key] = item.Value;
-                    }
-                }
-                _inventarioRepository.Atualizar(inventario.ToInventario());
-            }
+            var inventario = inventarioDto.ToInventario();
+            _inventarioRepository.Adicionar(inventario);
         }
 
-        public void RemoverCatalogoDoInventario(int inventarioId, AtualizarInventarioDto atualizarDto)
+        public void Atualizar(AtualizarInventarioDto inventarioDto, int id)
         {
-            var inventario = _inventarioRepository.ObterPorId(inventarioId);
-            if (inventario != null)
-            {
-                foreach (var item in atualizarDto.Itens)
-                {
-                    if (inventario.Itens.ContainsKey(item.Key))
-                    {
-                        if (inventario.Itens[item.Key] > item.Value)
-                        {
-                            inventario.Itens[item.Key] -= item.Value;
-                        }
-                        else
-                        {
-                            inventario.Itens.Remove(item.Key);
-                        }
-                    }
-                }
-                _inventarioRepository.Atualizar(inventario.ToInventario());
-            }
+            var inventario = inventarioDto.ToInventario(id);
+            _inventarioRepository.Atualizar(inventario);
         }
 
-        public DetalhesCatalogoDto ObterDetalhesCatalogoNoInventario(int catalogoId)
+        public DetalhesInventarioDto ObterPorId(int id)
         {
-            return _catalogoRepository.ObterPorId(catalogoId);
+            var inventario = _inventarioRepository.ObterPorId(id);
+            return inventario.ToDetalhesInventarioDto();
         }
 
-        public int QuantidadeCatalogoNoInventario(int inventarioId, int catalogoId)
+        public IEnumerable<DetalhesInventarioDto> ObterTodos()
         {
-            var inventario = _inventarioRepository.ObterPorId(inventarioId);
-            return inventario != null && inventario.Itens.ContainsKey(catalogoId) ? inventario.Itens[catalogoId] : 0;
+            var inventarios = _inventarioRepository.ObterTodos();
+            return inventarios.Select(i => i.ToDetalhesInventarioDto()).ToList();
         }
 
-        public DetalhesInventarioDto ObterInventarioPorId(int inventarioId)
+        public void Remover(int id)
         {
-            return _inventarioRepository.ObterPorId(inventarioId);
+            _inventarioRepository.Remover(id);
         }
     }
 }

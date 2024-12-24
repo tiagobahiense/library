@@ -17,7 +17,7 @@ namespace Library.src.Models
             _idInventario = idInventario;
             _idCliente = idCliente;
             DataEmprestimo = dataEmprestimo;
-            DataDevolucao = dataDevolucao; 
+            DataDevolucao = dataDevolucao;
         }
 
         [Key]

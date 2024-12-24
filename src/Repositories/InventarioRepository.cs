@@ -1,7 +1,6 @@
-using Library.src.DTO.Inventarios;
+using Library.src.Data;
 using Library.src.Models;
 using Library.src.Repositories.Interfaces;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,31 +8,15 @@ namespace Library.src.Repositories
 {
     public class InventarioRepository : IInventarioRepository
     {
-        private readonly DbContext _context;
+        private readonly LibraryContext _context;
 
-        public InventarioRepository(DbContext context)
+        public InventarioRepository(LibraryContext context)
         {
             _context = context;
         }
 
-        public DetalhesInventarioDto ObterPorId(int id)
+        public void Adicionar(Inventario inventario)
         {
-            var inventario = _context.Set<Inventario>().Find(id);
-            if (inventario != null)
-            {
-                return new DetalhesInventarioDto(inventario);
-            }
-            throw new KeyNotFoundException($"Inventario com ID {id} não encontrado.");
-        }
-
-        public IEnumerable<DetalhesInventarioDto> ObterTodos()
-        {
-            return _context.Set<Inventario>().Select(i => new DetalhesInventarioDto(i)).ToList();
-        }
-
-        public void Adicionar(CadastrarInventarioDto inventarioDto)
-        {
-            var inventario = inventarioDto.ToInventario(0); // Assumindo que o ID será gerado automaticamente
             _context.Set<Inventario>().Add(inventario);
             _context.SaveChanges();
         }
@@ -44,9 +27,19 @@ namespace Library.src.Repositories
             _context.SaveChanges();
         }
 
+        public Inventario ObterPorId(int id)
+        {
+            return _context.Set<Inventario>().Find(id) ?? new Inventario();
+        }
+
+        public IEnumerable<Inventario> ObterTodos()
+        {
+            return _context.Set<Inventario>().ToList();
+        }
+
         public void Remover(int id)
         {
-            var inventario = _context.Set<Inventario>().Find(id);
+            var inventario = ObterPorId(id);
             if (inventario != null)
             {
                 _context.Set<Inventario>().Remove(inventario);

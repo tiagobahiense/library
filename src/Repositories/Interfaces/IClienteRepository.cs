@@ -6,10 +6,10 @@ namespace Library.src.Repositories.Interfaces
 {
     public interface IClienteRepository
     {
-        Cliente ObterPorId(int id);
-        IEnumerable<Cliente> ObterTodos();
         void Adicionar(CadastrarClienteDto clienteDto);
         void Atualizar(AtualizarClienteDto clienteDto, int id);
+        Cliente ObterPorId(int id);
+        IEnumerable<Cliente> ObterTodos();
         void Remover(int id);
         IEnumerable<Emprestimo> ObterEmprestimosDoCliente(int clienteId);
     }
