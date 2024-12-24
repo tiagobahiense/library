@@ -7,14 +7,14 @@ namespace Library.src.Models
     public class Emprestimo
     {
         private int _id;
-        private int _idInventario;
+        private int _idCatalogo;
         private int _idCliente;
         private DateTime _dataEmprestimo;
         private DateTime _dataDevolucao;
 
-        public Emprestimo(int idInventario, int idCliente, DateTime dataEmprestimo, DateTime dataDevolucao)
+        public Emprestimo(int idCatalogo, int idCliente, DateTime dataEmprestimo, DateTime dataDevolucao)
         {
-            _idInventario = idInventario;
+            _idCatalogo = idCatalogo;
             _idCliente = idCliente;
             DataEmprestimo = dataEmprestimo;
             DataDevolucao = dataDevolucao;
@@ -28,10 +28,10 @@ namespace Library.src.Models
             private set { _id = value; }
         }
 
-        public int IdInventario
+        public int IdCatalogo
         {
-            get { return _idInventario; }
-            private set { _idInventario = value; }
+            get { return _idCatalogo; }
+            private set { _idCatalogo = value; }
         }
 
         public int IdCliente
@@ -43,29 +43,16 @@ namespace Library.src.Models
         public DateTime DataEmprestimo
         {
             get { return _dataEmprestimo; }
-            set
-            {
-                DateTime dataAtual = DateTime.Now;
-                if (value < dataAtual)
-                {
-                    throw new ArgumentException("A data não pode ser anterior à data atual.");
-                }
-                _dataEmprestimo = value;
-            }
+            set { _dataEmprestimo = value; }
         }
 
         public DateTime DataDevolucao
         {
             get { return _dataDevolucao; }
-            set
-            {
-                DateTime dataAtual = DateTime.Now;
-                if (value <= dataAtual)
-                {
-                    throw new ArgumentException("A data de devolução não pode ser menor ou igual à data atual.");
-                }
-                _dataDevolucao = value;
-            }
+            set { _dataDevolucao = value; }
         }
+
+        public virtual Catalogo? Catalogo { get; set; }
+        public virtual Cliente? Cliente { get; set; }
     }
 }

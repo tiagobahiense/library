@@ -310,12 +310,12 @@ namespace Library.src.UI
 
             while (true)
             {
-                int idInventario = ReadInt("ID do Inventário: ");
+                int idCatalogo = ReadInt("ID do Catálogo: ");
                 DateTime dataEmprestimo = ReadDateTime("Data de Emprestimo (YYYY-MM-DD): ");
 
                 var emprestimoDto = new CadastrarEmprestimoDto
                 {
-                    IdInventario = idInventario,
+                    IdCatalogo = idCatalogo,
                     DataEmprestimo = dataEmprestimo
                 };
                 emprestimos.Add(emprestimoDto);
@@ -363,7 +363,7 @@ namespace Library.src.UI
             var emprestimos = _emprestimoService.ObterEmprestimosDoCliente(clienteId);
             foreach (var emprestimo in emprestimos)
             {
-                Console.WriteLine($"Emprestimo ID: {emprestimo.Id}, Data de Emprestimo: {emprestimo.DataEmprestimo}, Data de Devolução: {emprestimo.DataDevolucao}");
+                Console.WriteLine($"Emprestimo ID: {emprestimo.Id}, Data de Emprestimo: {emprestimo.DataEmprestimo}, Data de Devolução: {emprestimo.DataDevolucao}, Nome do Catálogo: {emprestimo.NomeCatalogo}, Nome do Cliente: {emprestimo.NomeCliente}");
             }
         }
 

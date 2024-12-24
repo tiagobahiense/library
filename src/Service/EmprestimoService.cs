@@ -40,9 +40,10 @@ namespace Library.src.Service
 
         public IEnumerable<DetalhesEmprestimoDto> ObterEmprestimosDoCliente(int clienteId)
         {
-            return _emprestimoRepository.ObterTodos()
-                                         .Where(e => e.IdCliente == clienteId)
-                                         .Select(e => new DetalhesEmprestimoDto(e));
+            var emprestimos = _emprestimoRepository.ObterTodos()
+                                                     .Where(e => e.IdCliente == clienteId)
+                                                     .Select(e => new DetalhesEmprestimoDto(e));
+            return emprestimos.ToList();
         }
     }
 }
