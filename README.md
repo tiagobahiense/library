@@ -67,7 +67,6 @@ Library Project
    dotnet run
    ```
 
-5. Acesse a aplicação por meio de suas APIs.
 
 ## Como Contribuir
 
