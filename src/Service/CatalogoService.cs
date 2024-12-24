@@ -32,18 +32,35 @@ namespace Library.src.Service
         public DetalhesCatalogoDto ObterPorId(int id)
         {
             var catalogo = _catalogoRepository.ObterPorId(id);
-            return catalogo.ToDetalhesCatalogoDto();
+            return DetalhesCatalogoDto.FromCatalogo(catalogo);
         }
 
         public IEnumerable<DetalhesCatalogoDto> ObterTodos()
         {
             var catalogos = _catalogoRepository.ObterTodos();
-            return catalogos.Select(c => c.ToDetalhesCatalogoDto()).ToList();
+            return catalogos.Select(c => DetalhesCatalogoDto.FromCatalogo(c)).ToList();
         }
 
         public void Remover(int id)
         {
             _catalogoRepository.Remover(id);
+        }
+
+        public void AdicionarCatalogo(CadastrarCatalogoDto catalogoDto)
+        {
+            var catalogo = catalogoDto.ToCatalogo();
+            _catalogoRepository.Adicionar(catalogo);
+        }
+
+        public void RemoverCatalogo(int id)
+        {
+            _catalogoRepository.Remover(id);
+        }
+
+        public DetalhesCatalogoDto BuscarCatalogoPorId(int id)
+        {
+            var catalogo = _catalogoRepository.ObterPorId(id);
+            return DetalhesCatalogoDto.FromCatalogo(catalogo);
         }
     }
 }

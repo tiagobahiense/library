@@ -1,22 +1,20 @@
-using Library.src.Models;
 using System.Collections.Generic;
+using Library.src.Models;
 
 namespace Library.src.DTO.Inventarios
 {
     public class DetalhesInventarioDto
     {
-        public int Id { get; }
-        public Dictionary<int, int> Itens { get; }
+        public int Id { get; set; }
+        public Dictionary<int, int> Itens { get; set; } = new Dictionary<int, int>();
 
-        public DetalhesInventarioDto(Inventario inventario)
+        public static DetalhesInventarioDto FromInventario(Inventario inventario)
         {
-            Id = inventario.Id;
-            Itens = inventario.Itens;
-        }
-
-        public Inventario ToInventario()
-        {
-            return new Inventario(Id, Itens);
+            return new DetalhesInventarioDto
+            {
+                Id = inventario.Id,
+                Itens = inventario.Itens
+            };
         }
     }
 }

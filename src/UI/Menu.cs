@@ -98,7 +98,15 @@ namespace Library.src.UI
             DateTime dataNascimento = ReadDateTime("Data de Nascimento (YYYY-MM-DD): ");
             string cpf = ReadString("CPF: ");
 
-            var clienteDto = new CadastrarClienteDto(nome, endereco, telefone, email, dataNascimento, cpf);
+            var clienteDto = new CadastrarClienteDto
+            {
+                Nome = nome,
+                Endereco = endereco,
+                Telefone = telefone,
+                Email = email,
+                DataNascimento = dataNascimento,
+                CPF = cpf
+            };
             _clienteService.CadastrarCliente(clienteDto);
             Console.WriteLine("Cliente cadastrado com sucesso!");
         }
@@ -113,7 +121,15 @@ namespace Library.src.UI
             DateTime dataNascimento = ReadDateTime("Data de Nascimento (YYYY-MM-DD): ");
             string cpf = ReadString("CPF: ");
 
-            var clienteDto = new AtualizarClienteDto(nome, endereco, telefone, email, dataNascimento, cpf);
+            var clienteDto = new AtualizarClienteDto
+            {
+                Nome = nome,
+                Endereco = endereco,
+                Telefone = telefone,
+                Email = email,
+                DataNascimento = dataNascimento,
+                CPF = cpf
+            };
             _clienteService.AtualizarCliente(clienteId, clienteDto);
             Console.WriteLine("Cliente atualizado com sucesso!");
         }
@@ -169,7 +185,14 @@ namespace Library.src.UI
             string genero = ReadString("Gênero: ");
             int numeroPaginas = ReadInt("Número de Páginas: ");
 
-            var catalogoDto = new CadastrarCatalogoDto(titulo, autor, anoLancamento, genero, numeroPaginas);
+            var catalogoDto = new CadastrarCatalogoDto
+            {
+                Titulo = titulo,
+                Autor = autor,
+                AnoLancamento = anoLancamento,
+                Genero = genero,
+                NumeroPaginas = numeroPaginas
+            };
             _catalogoService.AdicionarCatalogo(catalogoDto);
             Console.WriteLine("Catálogo adicionado com sucesso!");
         }
@@ -226,31 +249,26 @@ namespace Library.src.UI
 
         private void AdicionarCatalogoAoInventario()
         {
-            int inventarioId = ReadInt("ID do Inventário: ");
             int catalogoId = ReadInt("ID do Catálogo: ");
             int quantidade = ReadInt("Quantidade: ");
 
-            var adicionarDto = new CadastrarInventarioDto(new Dictionary<int, int> { { catalogoId, quantidade } });
-            _inventarioService.AdicionarCatalogoAoInventario(inventarioId, adicionarDto);
+            _inventarioService.AdicionarCatalogoAoInventario(catalogoId, quantidade);
             Console.WriteLine("Catálogo adicionado ao inventário com sucesso!");
         }
 
         private void RemoverCatalogoDoInventario()
         {
-            int inventarioId = ReadInt("ID do Inventário: ");
             int catalogoId = ReadInt("ID do Catálogo: ");
             int quantidade = ReadInt("Quantidade: ");
 
-            var removerDto = new AtualizarInventarioDto(new Dictionary<int, int> { { catalogoId, quantidade } });
-            _inventarioService.RemoverCatalogoDoInventario(inventarioId, removerDto);
+            _inventarioService.RemoverCatalogoDoInventario(catalogoId, quantidade);
             Console.WriteLine("Catálogo removido do inventário com sucesso!");
         }
 
         private void ObterQuantidadeCatalogoNoInventario()
         {
-            int inventarioId = ReadInt("ID do Inventário: ");
             int catalogoId = ReadInt("ID do Catálogo: ");
-            int quantidade = _inventarioService.QuantidadeCatalogoNoInventario(inventarioId, catalogoId);
+            int quantidade = _inventarioService.QuantidadeCatalogoNoInventario(catalogoId);
             Console.WriteLine($"Quantidade do Catálogo no Inventário: {quantidade}");
         }
 
@@ -295,7 +313,11 @@ namespace Library.src.UI
                 int idInventario = ReadInt("ID do Inventário: ");
                 DateTime dataEmprestimo = ReadDateTime("Data de Emprestimo (YYYY-MM-DD): ");
 
-                var emprestimoDto = new CadastrarEmprestimoDto { IdInventario = idInventario, DataEmprestimo = dataEmprestimo };
+                var emprestimoDto = new CadastrarEmprestimoDto
+                {
+                    IdInventario = idInventario,
+                    DataEmprestimo = dataEmprestimo
+                };
                 emprestimos.Add(emprestimoDto);
 
                 if (!ReadBool("Deseja adicionar mais empréstimos? (s/n): "))
@@ -318,7 +340,11 @@ namespace Library.src.UI
                 int emprestimoId = ReadInt("ID do Empréstimo: ");
                 DateTime dataDevolucao = ReadDateTime("Data de Devolução (YYYY-MM-DD): ");
 
-                var devolucaoDto = new DevolucaoEmprestimoDto { EmprestimoId = emprestimoId, DataDevolucao = dataDevolucao };
+                var devolucaoDto = new DevolucaoEmprestimoDto
+                {
+                    EmprestimoId = emprestimoId,
+                    DataDevolucao = dataDevolucao
+                };
                 devolucoes.Add(devolucaoDto);
 
                 if (!ReadBool("Deseja adicionar mais devoluções? (s/n): "))

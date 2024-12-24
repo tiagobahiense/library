@@ -4,28 +4,23 @@ namespace Library.src.DTO.Catalogos
 {
     public class DetalhesCatalogoDto
     {
-        public int IdCatalogo { get; }
-        public string Titulo { get; }
-        public string Autor { get; }
-        public int AnoLancamento { get; }
-        public string Genero { get; }
-        public int NumeroPaginas { get; }
+        public int IdCatalogo { get; set; }
+        public string Titulo { get; set; } = string.Empty;
+        public string Autor { get; set; } = string.Empty;
+        public int AnoLancamento { get; set; }
+        public string Genero { get; set; } = string.Empty;
+        public int NumeroPaginas { get; set; }
 
-        public DetalhesCatalogoDto(Catalogo catalogo)
+        public static DetalhesCatalogoDto FromCatalogo(Catalogo catalogo)
         {
-            IdCatalogo = catalogo.IdCatalogo;
-            Titulo = catalogo.Titulo;
-            Autor = catalogo.Autor;
-            AnoLancamento = catalogo.AnoLancamento;
-            Genero = catalogo.Genero;
-            NumeroPaginas = catalogo.NumeroPaginas;
-        }
-
-        public Catalogo ToCatalogo()
-        {
-            return new Catalogo(Titulo, Autor, AnoLancamento, Genero, NumeroPaginas)
+            return new DetalhesCatalogoDto
             {
-                IdCatalogo = IdCatalogo
+                IdCatalogo = catalogo.IdCatalogo,
+                Titulo = catalogo.Titulo,
+                Autor = catalogo.Autor,
+                AnoLancamento = catalogo.AnoLancamento,
+                Genero = catalogo.Genero,
+                NumeroPaginas = catalogo.NumeroPaginas
             };
         }
     }

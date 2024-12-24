@@ -10,6 +10,9 @@ namespace Library.src.Service.Interfaces
         DetalhesInventarioDto ObterPorId(int id);
         IEnumerable<DetalhesInventarioDto> ObterTodos();
         void Remover(int id);
+
+        void AdicionarCatalogoAoInventario(int catalogoId, int quantidade);
+        void RemoverCatalogoDoInventario(int catalogoId, int quantidade);
+        int QuantidadeCatalogoNoInventario(int catalogoId);
     }
 }
-
