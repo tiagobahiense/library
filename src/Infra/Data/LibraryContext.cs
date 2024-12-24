@@ -20,6 +20,7 @@ namespace Library.src.Data
             modelBuilder.Entity<Cliente>().HasKey(c => c.Id);
             modelBuilder.Entity<Catalogo>().HasKey(c => c.IdCatalogo);
             modelBuilder.Entity<Inventario>().HasKey(i => i.Id);
+
         }
     }
 }

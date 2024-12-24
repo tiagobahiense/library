@@ -19,7 +19,6 @@ namespace LibraryApp
 
             var serviceProvider = serviceCollection.BuildServiceProvider();
 
-            
             TestDatabaseConnection(serviceProvider);
 
             var menu = serviceProvider.GetService<Menu>();
@@ -49,6 +48,7 @@ namespace LibraryApp
                 var context = scope.ServiceProvider.GetRequiredService<LibraryContext>();
                 try
                 {
+                    context.Database.Migrate();
                     context.Database.OpenConnection();
                     Console.WriteLine("Conexão com o banco de dados estabelecida com sucesso!");
                 }
