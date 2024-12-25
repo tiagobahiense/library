@@ -16,51 +16,28 @@ namespace Library.src.Service
             _catalogoRepository = catalogoRepository;
         }
 
-        public void Adicionar(CadastrarCatalogoDto catalogoDto)
+        public void AdicionarCatalogo(CadastrarCatalogoDto catalogoDto)
         {
-            var catalogo = catalogoDto.ToCatalogo();
+            var catalogo = new Catalogo(catalogoDto.Titulo, catalogoDto.Autor, catalogoDto.AnoLancamento, catalogoDto.Genero, catalogoDto.NumeroPaginas);
             _catalogoRepository.Adicionar(catalogo);
         }
 
-        public void Atualizar(AtualizarCatalogoDto catalogoDto, int id)
+        public void RemoverCatalogo(int catalogoId)
         {
-            var catalogo = catalogoDto.ToCatalogo();
-            catalogo.IdCatalogo = id;
-            _catalogoRepository.Atualizar(catalogo);
+            _catalogoRepository.Remover(catalogoId);
         }
 
-        public DetalhesCatalogoDto ObterPorId(int id)
+        public DetalhesCatalogoDto? BuscarCatalogoPorId(int catalogoId)
         {
-            var catalogo = _catalogoRepository.ObterPorId(id);
-            return DetalhesCatalogoDto.FromCatalogo(catalogo);
+            var catalogo = _catalogoRepository.ObterPorId(catalogoId);
+            return catalogo != null ? DetalhesCatalogoDto.FromCatalogo(catalogo) : null;
         }
 
-        public IEnumerable<DetalhesCatalogoDto> ObterTodos()
+        public IEnumerable<DetalhesCatalogoDto> ObterTodosCatalogos()
         {
             var catalogos = _catalogoRepository.ObterTodos();
             return catalogos.Select(c => DetalhesCatalogoDto.FromCatalogo(c)).ToList();
         }
-
-        public void Remover(int id)
-        {
-            _catalogoRepository.Remover(id);
-        }
-
-        public void AdicionarCatalogo(CadastrarCatalogoDto catalogoDto)
-        {
-            var catalogo = catalogoDto.ToCatalogo();
-            _catalogoRepository.Adicionar(catalogo);
-        }
-
-        public void RemoverCatalogo(int id)
-        {
-            _catalogoRepository.Remover(id);
-        }
-
-        public DetalhesCatalogoDto BuscarCatalogoPorId(int id)
-        {
-            var catalogo = _catalogoRepository.ObterPorId(id);
-            return DetalhesCatalogoDto.FromCatalogo(catalogo);
-        }
     }
 }
+

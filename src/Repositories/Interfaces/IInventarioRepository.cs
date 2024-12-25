@@ -5,10 +5,10 @@ namespace Library.src.Repositories.Interfaces
 {
     public interface IInventarioRepository
     {
-        void Adicionar(Inventario inventario);
-        void Atualizar(Inventario inventario);
-        Inventario ObterPorId(int id);
+        void AdicionarCatalogoAoInventario(int catalogoId, int quantidade);
+        void RemoverCatalogoDoInventario(int catalogoId, int quantidade);
+        Inventario? ObterPorId(int id);
+        int QuantidadeCatalogoNoInventario(int catalogoId);
         IEnumerable<Inventario> ObterTodos();
-        void Remover(int id);
     }
 }

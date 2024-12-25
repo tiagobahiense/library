@@ -5,10 +5,10 @@ namespace Library.src.Data
 {
     public class LibraryContext : DbContext
     {
-        public DbSet<Emprestimo> Emprestimos { get; set; }
-        public DbSet<Cliente> Clientes { get; set; }
-        public DbSet<Catalogo> Catalogos { get; set; }
-        public DbSet<Inventario> Inventarios { get; set; }
+        public DbSet<Emprestimo> Emprestimos { get; set; } = null!; 
+        public DbSet<Catalogo> Catalogos { get; set; } = null!; 
+        public DbSet<Cliente> Clientes { get; set; } = null!; 
+        public DbSet<Inventario> Inventarios { get; set; } = null!; 
 
         public LibraryContext(DbContextOptions<LibraryContext> options) : base(options)
         {
@@ -16,11 +16,19 @@ namespace Library.src.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Emprestimo>().HasKey(e => e.Id);
-            modelBuilder.Entity<Cliente>().HasKey(c => c.Id);
-            modelBuilder.Entity<Catalogo>().HasKey(c => c.IdCatalogo);
-            modelBuilder.Entity<Inventario>().HasKey(i => i.Id);
+            modelBuilder.Entity<Emprestimo>()
+                .HasOne(e => e.Catalogo)
+                .WithMany()
+                .HasForeignKey(e => e.IdCatalogo);
 
+            modelBuilder.Entity<Emprestimo>()
+                .HasOne(e => e.Cliente)
+                .WithMany()
+                .HasForeignKey(e => e.IdCliente);
+
+            
+            modelBuilder.Entity<Inventario>()
+                .HasKey(i => i.Id);
         }
     }
 }

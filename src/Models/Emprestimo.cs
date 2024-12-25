@@ -18,6 +18,8 @@ namespace Library.src.Models
             _idCliente = idCliente;
             DataEmprestimo = dataEmprestimo;
             DataDevolucao = dataDevolucao;
+            Catalogo = new Catalogo();
+            Cliente = new Cliente(); 
         }
 
         [Key]
@@ -52,7 +54,8 @@ namespace Library.src.Models
             set { _dataDevolucao = value; }
         }
 
-        public virtual Catalogo? Catalogo { get; set; }
-        public virtual Cliente? Cliente { get; set; }
+        
+        public virtual Catalogo Catalogo { get; set; }
+        public virtual Cliente Cliente { get; set; }
     }
 }

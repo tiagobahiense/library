@@ -16,77 +16,25 @@ namespace Library.src.Service
             _inventarioRepository = inventarioRepository;
         }
 
-        public void Adicionar(CadastrarInventarioDto inventarioDto)
+        public void AdicionarCatalogoAoInventario(int catalogoId, int quantidade)
         {
-            var inventario = inventarioDto.ToInventario();
-            _inventarioRepository.Adicionar(inventario);
+            _inventarioRepository.AdicionarCatalogoAoInventario(catalogoId, quantidade);
         }
 
-        public void Atualizar(AtualizarInventarioDto inventarioDto, int id)
+        public void RemoverCatalogoDoInventario(int catalogoId, int quantidade)
         {
-            var inventario = inventarioDto.ToInventario(id);
-            _inventarioRepository.Atualizar(inventario);
+            _inventarioRepository.RemoverCatalogoDoInventario(catalogoId, quantidade);
         }
 
-        public DetalhesInventarioDto ObterPorId(int id)
+        public int QuantidadeCatalogoNoInventario(int catalogoId)
         {
-            var inventario = _inventarioRepository.ObterPorId(id);
-            return DetalhesInventarioDto.FromInventario(inventario);
+            return _inventarioRepository.QuantidadeCatalogoNoInventario(catalogoId);
         }
 
         public IEnumerable<DetalhesInventarioDto> ObterTodos()
         {
             var inventarios = _inventarioRepository.ObterTodos();
             return inventarios.Select(i => DetalhesInventarioDto.FromInventario(i)).ToList();
-        }
-
-        public void Remover(int id)
-        {
-            _inventarioRepository.Remover(id);
-        }
-
-        public void AdicionarCatalogoAoInventario(int catalogoId, int quantidade)
-        {
-            var inventario = _inventarioRepository.ObterPorId(catalogoId);
-            if (inventario != null)
-            {
-                if (inventario.Itens.ContainsKey(catalogoId))
-                {
-                    inventario.Itens[catalogoId] += quantidade;
-                }
-                else
-                {
-                    inventario.Itens.Add(catalogoId, quantidade);
-                }
-                _inventarioRepository.Atualizar(inventario);
-            }
-        }
-
-        public void RemoverCatalogoDoInventario(int catalogoId, int quantidade)
-        {
-            var inventario = _inventarioRepository.ObterPorId(catalogoId);
-            if (inventario != null && inventario.Itens.ContainsKey(catalogoId))
-            {
-                if (inventario.Itens[catalogoId] > quantidade)
-                {
-                    inventario.Itens[catalogoId] -= quantidade;
-                }
-                else
-                {
-                    inventario.Itens.Remove(catalogoId);
-                }
-                _inventarioRepository.Atualizar(inventario);
-            }
-        }
-
-        public int QuantidadeCatalogoNoInventario(int catalogoId)
-        {
-            var inventario = _inventarioRepository.ObterPorId(catalogoId);
-            if (inventario != null && inventario.Itens.ContainsKey(catalogoId))
-            {
-                return inventario.Itens[catalogoId];
-            }
-            return 0;
         }
     }
 }

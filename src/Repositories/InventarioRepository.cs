@@ -1,6 +1,7 @@
-using Library.src.Data;
 using Library.src.Models;
+using Library.src.Data;
 using Library.src.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -15,36 +16,56 @@ namespace Library.src.Repositories
             _context = context;
         }
 
-        public void Adicionar(Inventario inventario)
+        public void AdicionarCatalogoAoInventario(int catalogoId, int quantidade)
         {
-            _context.Set<Inventario>().Add(inventario);
+            var inventario = ObterPorId(catalogoId);
+            if (inventario == null)
+            {
+                inventario = new Inventario { Id = catalogoId, Itens = new Dictionary<int, int> { { catalogoId, quantidade } } };
+                _context.Inventarios.Add(inventario);
+            }
+            else
+            {
+                if (inventario.Itens.ContainsKey(catalogoId))
+                {
+                    inventario.Itens[catalogoId] += quantidade;
+                }
+                else
+                {
+                    inventario.Itens.Add(catalogoId, quantidade);
+                }
+            }
             _context.SaveChanges();
         }
 
-        public void Atualizar(Inventario inventario)
+        public void RemoverCatalogoDoInventario(int catalogoId, int quantidade)
         {
-            _context.Set<Inventario>().Update(inventario);
-            _context.SaveChanges();
+            var inventario = ObterPorId(catalogoId);
+            if (inventario != null && inventario.Itens.ContainsKey(catalogoId))
+            {
+                inventario.Itens[catalogoId] -= quantidade;
+                if (inventario.Itens[catalogoId] <= 0)
+                {
+                    inventario.Itens.Remove(catalogoId);
+                }
+                _context.SaveChanges();
+            }
         }
 
-        public Inventario ObterPorId(int id)
+        public Inventario? ObterPorId(int id)
         {
-            return _context.Set<Inventario>().Find(id) ?? new Inventario();
+            return _context.Inventarios.Find(id);
+        }
+
+        public int QuantidadeCatalogoNoInventario(int catalogoId)
+        {
+            var inventario = ObterPorId(catalogoId);
+            return inventario?.Itens.ContainsKey(catalogoId) == true ? inventario.Itens[catalogoId] : 0;
         }
 
         public IEnumerable<Inventario> ObterTodos()
         {
-            return _context.Set<Inventario>().ToList();
-        }
-
-        public void Remover(int id)
-        {
-            var inventario = ObterPorId(id);
-            if (inventario != null)
-            {
-                _context.Set<Inventario>().Remove(inventario);
-                _context.SaveChanges();
-            }
+            return _context.Inventarios.ToList();
         }
     }
 }

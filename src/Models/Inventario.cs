@@ -16,8 +16,8 @@ namespace Library.src.Models
 
         public Inventario(int id, Dictionary<int, int> itens)
         {
-            _id = id;
-            _itens = itens;
+            Id = id;
+            _itens = itens ?? new Dictionary<int, int>();
         }
 
         [Key]
@@ -25,14 +25,14 @@ namespace Library.src.Models
         public int Id
         {
             get { return _id; }
-            private set { _id = value; }
+            set { _id = value; }
         }
 
         [NotMapped]
         public Dictionary<int, int> Itens
         {
             get { return _itens; }
-            set { _itens = value; }
+            set { _itens = value ?? new Dictionary<int, int>(); }
         }
     }
 }
