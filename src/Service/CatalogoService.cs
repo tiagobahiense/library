@@ -27,9 +27,9 @@ namespace Library.src.Service
             _catalogoRepository.Remover(catalogoId);
         }
 
-        public DetalhesCatalogoDto? BuscarCatalogoPorId(int catalogoId)
+        public DetalhesCatalogoDto? BuscarCatalogoPorId(int idCatalogo)
         {
-            var catalogo = _catalogoRepository.ObterPorId(catalogoId);
+            var catalogo = _catalogoRepository.ObterPorId(idCatalogo);
             return catalogo != null ? DetalhesCatalogoDto.FromCatalogo(catalogo) : null;
         }
 
@@ -40,4 +40,3 @@ namespace Library.src.Service
         }
     }
 }
-

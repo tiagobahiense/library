@@ -22,9 +22,9 @@ namespace Library.src.Repositories
             _context.SaveChanges();
         }
 
-        public void Remover(int catalogoId)
+        public void Remover(int idCatalogo)
         {
-            var catalogo = ObterPorId(catalogoId);
+            var catalogo = ObterPorId(idCatalogo);
             if (catalogo != null)
             {
                 _context.Catalogos.Remove(catalogo);
@@ -43,4 +43,3 @@ namespace Library.src.Repositories
         }
     }
 }
-

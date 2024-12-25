@@ -7,19 +7,20 @@ namespace Library.src.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Column("idCatalogo")] 
         public int Id { get; set; }
 
         [Required]
-        public string Titulo { get; set; } = string.Empty;
+        public string Titulo { get; set; } = string.Empty; 
 
         [Required]
-        public string Autor { get; set; } = string.Empty;
+        public string Autor { get; set; } = string.Empty; 
 
         [Required]
         public int AnoLancamento { get; set; }
 
         [Required]
-        public string Genero { get; set; } = string.Empty;
+        public string Genero { get; set; } = string.Empty; 
 
         [Required]
         public int NumeroPaginas { get; set; }
@@ -29,7 +30,7 @@ namespace Library.src.Models
         {
         }
 
-        
+        // Construtor com parâmetros
         public Catalogo(string titulo, string autor, int anoLancamento, string genero, int numeroPaginas)
         {
             Titulo = titulo;

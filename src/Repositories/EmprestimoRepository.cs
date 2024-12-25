@@ -33,6 +33,7 @@ namespace Library.src.Repositories
             return _context.Emprestimos
                             .Include(e => e.Catalogo)
                             .Include(e => e.Cliente)
+                            .Include(e => e.Inventario)
                             .FirstOrDefault(e => e.Id == id);
         }
 
@@ -41,6 +42,7 @@ namespace Library.src.Repositories
             return _context.Emprestimos
                             .Include(e => e.Catalogo)
                             .Include(e => e.Cliente)
+                            .Include(e => e.Inventario)
                             .ToList();
         }
     }
