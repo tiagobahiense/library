@@ -23,7 +23,7 @@ namespace library.Migrations
                 .HasAnnotation("ProductVersion", "8.0.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
+            
 
             modelBuilder.Entity("Library.src.Models.Catalogo", b =>
                 {

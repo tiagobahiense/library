@@ -9,7 +9,28 @@ namespace Library.src.DTO.Inventarios
 
         public Inventario ToInventario(int id)
         {
-            return new Inventario(id, Itens);
+            var inventario = new Inventario { Id = id };
+
+            foreach (var item in Itens)
+            {
+                var catalogoInventario = inventario.ItensInventario.FirstOrDefault(i => i.IdCatalogo == item.Key);
+                if (catalogoInventario != null)
+                {
+                    catalogoInventario.Quantidade = item.Value;
+                }
+                else
+                {
+                    inventario.ItensInventario.Add(new CatalogoInventario
+                    {
+                        IdCatalogo = item.Key,
+                        Quantidade = item.Value,
+                        InventarioId = id
+                    });
+                }
+            }
+
+            return inventario;
         }
     }
 }
+

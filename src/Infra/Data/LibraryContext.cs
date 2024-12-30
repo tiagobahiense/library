@@ -7,8 +7,9 @@ namespace Library.src.Data
     {
         public DbSet<Emprestimo> Emprestimos { get; set; } = null!;
         public DbSet<Catalogo> Catalogos { get; set; } = null!;
-        public DbSet<Cliente> Clientes { get; set; } = null!; 
-        public DbSet<Inventario> Inventarios { get; set; } = null!; 
+        public DbSet<Cliente> Clientes { get; set; } = null!;
+        public DbSet<Inventario> Inventarios { get; set; } = null!;
+        public DbSet<CatalogoInventario> CatalogosInventario { get; set; } = null!;
 
         public LibraryContext(DbContextOptions<LibraryContext> options) : base(options)
         {
@@ -31,14 +32,25 @@ namespace Library.src.Data
                 .WithMany()
                 .HasForeignKey(e => e.IdInventario);
 
-            
             modelBuilder.Entity<Inventario>()
                 .HasKey(i => i.Id);
 
-            
             modelBuilder.Entity<Catalogo>()
                 .HasKey(c => c.Id)
                 .HasName("idCatalogo");
+
+            modelBuilder.Entity<CatalogoInventario>()
+                .HasKey(ci => ci.Id);
+
+            modelBuilder.Entity<CatalogoInventario>()
+                .HasOne(ci => ci.Catalogo)
+                .WithMany()
+                .HasForeignKey(ci => ci.IdCatalogo);
+
+            modelBuilder.Entity<CatalogoInventario>()
+                .HasOne(ci => ci.Inventario)
+                .WithMany(i => i.ItensInventario)
+                .HasForeignKey(ci => ci.InventarioId);
         }
     }
 }

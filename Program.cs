@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using Library.src.UI;
 using Library.src.Data;
+using Microsoft.Extensions.Logging;
 
 namespace LibraryApp
 {
@@ -39,6 +40,9 @@ namespace LibraryApp
             services.AddTransient<ICatalogoRepository, CatalogoRepository>();
             services.AddTransient<IInventarioRepository, InventarioRepository>();
             services.AddTransient<IEmprestimoRepository, EmprestimoRepository>();
+
+            // Adicionar logging
+            services.AddLogging(configure => configure.AddConsole());
         }
 
         private static void TestDatabaseConnection(IServiceProvider serviceProvider)

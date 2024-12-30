@@ -6,33 +6,31 @@ namespace Library.src.Models
 {
     public class Inventario
     {
-        private int _id;
-        private Dictionary<int, int> _itens;
-
-        public Inventario()
-        {
-            _itens = new Dictionary<int, int>();
-        }
-
-        public Inventario(int id, Dictionary<int, int> itens)
-        {
-            Id = id;
-            _itens = itens ?? new Dictionary<int, int>();
-        }
-
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id
-        {
-            get { return _id; }
-            set { _id = value; }
-        }
+        public int Id { get; set; }
 
-        [NotMapped]
-        public Dictionary<int, int> Itens
-        {
-            get { return _itens; }
-            set { _itens = value ?? new Dictionary<int, int>(); }
-        }
+        public virtual ICollection<CatalogoInventario> ItensInventario { get; set; } = new List<CatalogoInventario>();
+    }
+
+    public class CatalogoInventario
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+
+        [Column("IdCatalogo")]
+        public int IdCatalogo { get; set; }
+
+        public int Quantidade { get; set; }
+
+        [ForeignKey("IdCatalogo")]
+        public virtual Catalogo? Catalogo { get; set; }
+
+        [ForeignKey("InventarioId")]
+        public int InventarioId { get; set; }
+
+        [ForeignKey("InventarioId")]
+        public virtual Inventario? Inventario { get; set; }
     }
 }
