@@ -20,7 +20,7 @@ namespace Library.src.Service
         {
             foreach (var emprestimoDto in emprestimos)
             {
-                var emprestimo = emprestimoDto.ToEmprestimo(clienteId, 0);
+                var emprestimo = emprestimoDto.ToEmprestimo(clienteId);
                 _emprestimoRepository.Adicionar(emprestimo);
             }
         }

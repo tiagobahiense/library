@@ -311,12 +311,14 @@ namespace Library.src.UI
             while (true)
             {
                 int idCatalogo = ReadInt("ID do Catálogo: ");
+                int idInventario = ReadInt("ID do Inventário: ");
                 DateTime dataEmprestimo = ReadDateTime("Data de Emprestimo (YYYY-MM-DD): ");
                 DateTime dataDevolucao = ReadDateTime("Data de Devolução (YYYY-MM-DD): ");
 
                 var emprestimoDto = new CadastrarEmprestimoDto
                 {
                     IdCatalogo = idCatalogo,
+                    IdInventario = idInventario,
                     DataEmprestimo = dataEmprestimo,
                     DataDevolucao = dataDevolucao 
                 };
@@ -331,6 +333,7 @@ namespace Library.src.UI
             _emprestimoService.RegistrarEmprestimo(clienteId, emprestimos);
             Console.WriteLine("Empréstimo registrado com sucesso!");
         }
+
 
         private void DevolverEmprestimo()
         {
@@ -363,11 +366,24 @@ namespace Library.src.UI
         {
             int clienteId = ReadInt("ID do Cliente: ");
             var emprestimos = _emprestimoService.ObterEmprestimosDoCliente(clienteId);
+            if (!emprestimos.Any())
+            {
+                Console.WriteLine("Nenhum empréstimo encontrado para este cliente.");
+                return;
+            }
             foreach (var emprestimo in emprestimos)
             {
-                Console.WriteLine($"Emprestimo ID: {emprestimo.Id}, Data de Emprestimo: {emprestimo.DataEmprestimo}, Data de Devolução: {emprestimo.DataDevolucao}, Nome do Catálogo: {emprestimo.NomeCatalogo}, Nome do Cliente: {emprestimo.NomeCliente}");
+                Console.WriteLine($"ID do Empréstimo: {emprestimo.Id}");
+                Console.WriteLine($"Nome do Cliente: {emprestimo.NomeCliente}");
+                Console.WriteLine($"Nome do Catálogo: {emprestimo.NomeCatalogo}");
+                Console.WriteLine($"Data de Empréstimo: {emprestimo.DataEmprestimo.ToShortDateString()}");
+                Console.WriteLine($"Data de Devolução: {emprestimo.DataDevolucao.ToShortDateString()}");
+                Console.WriteLine("----------------------------------------");
             }
         }
+
+
+
 
         private int ReadInt(string prompt)
         {
