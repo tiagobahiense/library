@@ -3,7 +3,6 @@ using System;
 using Library.src.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -17,18 +16,15 @@ namespace library.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.2")
+                .HasAnnotation("ProductVersion", "7.0.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
-
-            
 
             modelBuilder.Entity("Library.src.Models.Catalogo", b =>
                 {
-                    b.Property<int>("IdCatalogo")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("IdCatalogo"));
+                        .HasColumnType("int")
+                        .HasColumnName("idCatalogo");
 
                     b.Property<int>("AnoLancamento")
                         .HasColumnType("int");
@@ -48,7 +44,8 @@ namespace library.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.HasKey("IdCatalogo");
+                    b.HasKey("Id")
+                        .HasName("idCatalogo");
 
                     b.ToTable("Catalogos");
                 });
@@ -58,8 +55,6 @@ namespace library.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CPF")
                         .IsRequired()
@@ -95,21 +90,30 @@ namespace library.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
-
                     b.Property<DateTime>("DataDevolucao")
                         .HasColumnType("datetime(6)");
 
                     b.Property<DateTime>("DataEmprestimo")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<int>("IdCatalogo")
+                        .HasColumnType("int")
+                        .HasColumnName("IdCatalogo");
+
                     b.Property<int>("IdCliente")
                         .HasColumnType("int");
 
                     b.Property<int>("IdInventario")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("IdInventario");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IdCatalogo");
+
+                    b.HasIndex("IdCliente");
+
+                    b.HasIndex("IdInventario");
 
                     b.ToTable("Emprestimos");
                 });
@@ -120,11 +124,40 @@ namespace library.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    b.Property<string>("ItensJson")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
                     b.ToTable("Inventarios");
+                });
+
+            modelBuilder.Entity("Library.src.Models.Emprestimo", b =>
+                {
+                    b.HasOne("Library.src.Models.Catalogo", "Catalogo")
+                        .WithMany()
+                        .HasForeignKey("IdCatalogo")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Library.src.Models.Cliente", "Cliente")
+                        .WithMany()
+                        .HasForeignKey("IdCliente")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Library.src.Models.Inventario", "Inventario")
+                        .WithMany()
+                        .HasForeignKey("IdInventario")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Catalogo");
+
+                    b.Navigation("Cliente");
+
+                    b.Navigation("Inventario");
                 });
 #pragma warning restore 612, 618
         }

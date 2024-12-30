@@ -17,6 +17,7 @@ namespace Library.src.Repositories
         {
             _context = context;
             _logger = logger;
+            InicializarInventario();
         }
 
         public void Adicionar(Inventario inventario)
@@ -36,14 +37,12 @@ namespace Library.src.Repositories
         public Inventario ObterPorId(int id)
         {
             return _context.Inventarios
-                           .Include(i => i.ItensInventario)
-                           .FirstOrDefault(i => i.Id == id) ?? new Inventario();
+                           .FirstOrDefault(i => i.Id == id);
         }
 
         public IEnumerable<Inventario> ObterTodos()
         {
             return _context.Inventarios
-                           .Include(i => i.ItensInventario)
                            .ToList();
         }
 
@@ -56,15 +55,13 @@ namespace Library.src.Repositories
                 Adicionar(inventario);
             }
 
-            var itemInventario = inventario.ItensInventario.FirstOrDefault(i => i.IdCatalogo == idCatalogo);
-            if (itemInventario == null)
+            if (inventario.Itens.ContainsKey(idCatalogo))
             {
-                itemInventario = new CatalogoInventario { IdCatalogo = idCatalogo, Quantidade = quantidade, InventarioId = inventario.Id };
-                inventario.ItensInventario.Add(itemInventario);
+                inventario.Itens[idCatalogo] += quantidade;
             }
             else
             {
-                itemInventario.Quantidade += quantidade;
+                inventario.Itens[idCatalogo] = quantidade;
             }
 
             Atualizar(inventario);
@@ -80,17 +77,17 @@ namespace Library.src.Repositories
                 return;
             }
 
-            var itemInventario = inventario.ItensInventario.FirstOrDefault(i => i.IdCatalogo == idCatalogo);
-            if (itemInventario == null)
+            if (inventario.Itens.ContainsKey(idCatalogo))
+            {
+                inventario.Itens[idCatalogo] -= quantidade;
+                if (inventario.Itens[idCatalogo] <= 0)
+                {
+                    inventario.Itens.Remove(idCatalogo);
+                }
+            }
+            else
             {
                 _logger.LogWarning($"Catálogo não encontrado no inventário. ID do Catálogo: {idCatalogo}");
-                return;
-            }
-
-            itemInventario.Quantidade -= quantidade;
-            if (itemInventario.Quantidade <= 0)
-            {
-                inventario.ItensInventario.Remove(itemInventario);
             }
 
             Atualizar(inventario);
@@ -106,14 +103,25 @@ namespace Library.src.Repositories
                 return 0;
             }
 
-            var itemInventario = inventario.ItensInventario.FirstOrDefault(i => i.IdCatalogo == idCatalogo);
-            if (itemInventario == null)
+            if (inventario.Itens.ContainsKey(idCatalogo))
+            {
+                return inventario.Itens[idCatalogo];
+            }
+            else
             {
                 _logger.LogWarning($"Catálogo não encontrado no inventário. ID do Catálogo: {idCatalogo}");
                 return 0;
             }
+        }
 
-            return itemInventario.Quantidade;
+        private void InicializarInventario()
+        {
+            var inventario = ObterPorId(1);
+            if (inventario == null)
+            {
+                inventario = new Inventario();
+                Adicionar(inventario);
+            }
         }
     }
 }
