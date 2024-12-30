@@ -7,7 +7,9 @@ namespace Library.src.Repositories.Interfaces
     {
         void Adicionar(Emprestimo emprestimo);
         void Atualizar(Emprestimo emprestimo);
-        Emprestimo? ObterPorId(int id);
+        Emprestimo ObterPorId(int id);
         IEnumerable<Emprestimo> ObterTodos();
+        IEnumerable<Emprestimo> ObterPorClienteId(int clienteId);
+        void Remover(int id);
     }
 }

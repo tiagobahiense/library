@@ -10,25 +10,37 @@ namespace Library.src.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [Column("IdCatalogo")]
-        public int IdCatalogo { get; set; }
-
-        public int IdCliente { get; set; }
-
-        [Column("IdInventario")]
-        public int IdInventario { get; set; }
-
+        [Required]
         public DateTime DataEmprestimo { get; set; }
 
+        [Required]
         public DateTime DataDevolucao { get; set; }
 
+        [Required]
+        public int IdCatalogo { get; set; }
+
+        [Required]
+        public int IdCliente { get; set; }
+
+        [Required]
+        public int IdInventario { get; set; }
+
         [ForeignKey("IdCatalogo")]
-        public virtual Catalogo? Catalogo { get; set; }
+        [Required]
+        public Catalogo Catalogo { get; set; } = null!; // Inicializando a propriedade como não nula
 
         [ForeignKey("IdCliente")]
-        public virtual Cliente? Cliente { get; set; }
+        [Required]
+        public Cliente Cliente { get; set; } = null!; // Inicializando a propriedade como não nula
 
         [ForeignKey("IdInventario")]
-        public virtual Inventario? Inventario { get; set; }
+        [Required]
+        public Inventario Inventario { get; set; } = null!; // Inicializando a propriedade como não nula
+
+        [NotMapped]
+        public string NomeCliente => Cliente?.Nome ?? string.Empty;
+
+        [NotMapped]
+        public string NomeCatalogo => Catalogo?.Titulo ?? string.Empty;
     }
 }

@@ -37,6 +37,11 @@ namespace Library.src.Data
             modelBuilder.Entity<Catalogo>()
                 .HasKey(c => c.Id)
                 .HasName("idCatalogo");
+
+            modelBuilder.Entity<Inventario>()
+                .HasOne(i => i.Catalogo)
+                .WithMany(c => c.Inventarios)
+                .HasForeignKey(i => i.CatalogoId);
         }
     }
 }

@@ -17,7 +17,6 @@ namespace Library.src.Repositories
         {
             _context = context;
             _logger = logger;
-            InicializarInventario();
         }
 
         public void Adicionar(Inventario inventario)
@@ -37,91 +36,67 @@ namespace Library.src.Repositories
         public Inventario ObterPorId(int id)
         {
             return _context.Inventarios
-                           .FirstOrDefault(i => i.Id == id);
+                           .Include(i => i.Catalogo)
+                           .FirstOrDefault(i => i.Id == id) ?? new Inventario();
         }
 
         public IEnumerable<Inventario> ObterTodos()
         {
             return _context.Inventarios
+                           .Include(i => i.Catalogo)
                            .ToList();
         }
 
-        public void AdicionarCatalogoAoInventario(int idCatalogo, int quantidade)
+        public void AdicionarCatalogoAoInventario(int catalogoId, int quantidade)
         {
-            var inventario = ObterPorId(1); // Supondo que você tenha apenas um inventário
+            var inventario = _context.Inventarios.FirstOrDefault(i => i.CatalogoId == catalogoId);
             if (inventario == null)
             {
-                inventario = new Inventario();
+                inventario = new Inventario
+                {
+                    CatalogoId = catalogoId,
+                    QuantidadeDisponivel = quantidade
+                };
                 Adicionar(inventario);
-            }
-
-            if (inventario.Itens.ContainsKey(idCatalogo))
-            {
-                inventario.Itens[idCatalogo] += quantidade;
             }
             else
             {
-                inventario.Itens[idCatalogo] = quantidade;
+                inventario.QuantidadeDisponivel += quantidade;
+                Atualizar(inventario);
             }
-
-            Atualizar(inventario);
-            _logger.LogInformation($"Catálogo adicionado ao inventário com sucesso! ID do Catálogo: {idCatalogo}, Quantidade: {quantidade}");
+            _logger.LogInformation($"Catálogo adicionado ao inventário com sucesso! ID do Catálogo: {catalogoId}, Quantidade: {quantidade}");
         }
 
-        public void RemoverCatalogoDoInventario(int idCatalogo, int quantidade)
+        public void RemoverCatalogoDoInventario(int catalogoId, int quantidade)
         {
-            var inventario = ObterPorId(1); // Supondo que você tenha apenas um inventário
+            var inventario = _context.Inventarios.FirstOrDefault(i => i.CatalogoId == catalogoId);
             if (inventario == null)
             {
                 _logger.LogWarning($"Inventário não encontrado.");
                 return;
             }
 
-            if (inventario.Itens.ContainsKey(idCatalogo))
+            inventario.QuantidadeDisponivel -= quantidade;
+            if (inventario.QuantidadeDisponivel <= 0)
             {
-                inventario.Itens[idCatalogo] -= quantidade;
-                if (inventario.Itens[idCatalogo] <= 0)
-                {
-                    inventario.Itens.Remove(idCatalogo);
-                }
+                _context.Inventarios.Remove(inventario);
             }
             else
             {
-                _logger.LogWarning($"Catálogo não encontrado no inventário. ID do Catálogo: {idCatalogo}");
+                Atualizar(inventario);
             }
-
-            Atualizar(inventario);
-            _logger.LogInformation($"Catálogo removido do inventário com sucesso! ID do Catálogo: {idCatalogo}, Quantidade: {quantidade}");
+            _logger.LogInformation($"Catálogo removido do inventário com sucesso! ID do Catálogo: {catalogoId}, Quantidade: {quantidade}");
         }
 
-        public int QuantidadeCatalogoNoInventario(int idCatalogo)
+        public int QuantidadeCatalogoNoInventario(int catalogoId)
         {
-            var inventario = ObterPorId(1); // Supondo que você tenha apenas um inventário
+            var inventario = _context.Inventarios.FirstOrDefault(i => i.CatalogoId == catalogoId);
             if (inventario == null)
             {
-                _logger.LogWarning($"Inventário não encontrado.");
+                _logger.LogWarning($"Catálogo não encontrado no inventário. ID do Catálogo: {catalogoId}");
                 return 0;
             }
-
-            if (inventario.Itens.ContainsKey(idCatalogo))
-            {
-                return inventario.Itens[idCatalogo];
-            }
-            else
-            {
-                _logger.LogWarning($"Catálogo não encontrado no inventário. ID do Catálogo: {idCatalogo}");
-                return 0;
-            }
-        }
-
-        private void InicializarInventario()
-        {
-            var inventario = ObterPorId(1);
-            if (inventario == null)
-            {
-                inventario = new Inventario();
-                Adicionar(inventario);
-            }
+            return inventario.QuantidadeDisponivel;
         }
     }
 }
