@@ -3,7 +3,6 @@ using Library.src.Repositories.Interfaces;
 using Library.src.Service.Interfaces;
 using Library.src.DTO.Emprestimos;
 using System.Collections.Generic;
-using Microsoft.Extensions.Logging;
 using System.Linq;
 
 namespace Library.src.Service
@@ -11,24 +10,20 @@ namespace Library.src.Service
     public class EmprestimoService : IEmprestimoService
     {
         private readonly IEmprestimoRepository _repository;
-        private readonly ILogger<EmprestimoService> _logger;
 
-        public EmprestimoService(IEmprestimoRepository repository, ILogger<EmprestimoService> logger)
+        public EmprestimoService(IEmprestimoRepository repository)
         {
             _repository = repository;
-            _logger = logger;
         }
 
         public void Adicionar(Emprestimo emprestimo)
         {
             _repository.Adicionar(emprestimo);
-            _logger.LogInformation($"Empréstimo registrado: ID do Cliente: {emprestimo.IdCliente}, ID do Catálogo: {emprestimo.IdCatalogo}, ID do Inventário: {emprestimo.IdInventario}, Data de Empréstimo: {emprestimo.DataEmprestimo}, Data de Devolução: {emprestimo.DataDevolucao}");
         }
 
         public void Atualizar(Emprestimo emprestimo)
         {
             _repository.Atualizar(emprestimo);
-            _logger.LogInformation($"Empréstimo atualizado: ID: {emprestimo.Id}");
         }
 
         public Emprestimo ObterPorId(int id)
@@ -43,15 +38,12 @@ namespace Library.src.Service
 
         public IEnumerable<Emprestimo> ObterPorClienteId(int clienteId)
         {
-            var emprestimos = _repository.ObterPorClienteId(clienteId);
-            _logger.LogInformation($"Obtendo empréstimos do cliente: ID do Cliente: {clienteId}, Quantidade de Empréstimos: {emprestimos.Count()}");
-            return emprestimos;
+            return _repository.ObterPorClienteId(clienteId);
         }
 
         public void Remover(int id)
         {
             _repository.Remover(id);
-            _logger.LogInformation($"Empréstimo removido: ID: {id}");
         }
 
         public void RegistrarEmprestimo(int clienteId, List<CadastrarEmprestimoDto> emprestimosDto)

@@ -1,4 +1,3 @@
-using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -17,30 +16,27 @@ namespace Library.src.Models
         public DateTime DataDevolucao { get; set; }
 
         [Required]
-        public int IdCatalogo { get; set; }
+        public int IdCliente { get; set; }
 
         [Required]
-        public int IdCliente { get; set; }
+        public int IdCatalogo { get; set; }
 
         [Required]
         public int IdInventario { get; set; }
 
         [ForeignKey("IdCatalogo")]
-        [Required]
-        public Catalogo Catalogo { get; set; } = null!; 
+        public Catalogo Catalogo { get; set; }
 
         [ForeignKey("IdCliente")]
-        [Required]
-        public Cliente Cliente { get; set; } = null!; 
+        public Cliente Cliente { get; set; }
 
         [ForeignKey("IdInventario")]
-        [Required]
-        public Inventario Inventario { get; set; } = null!; 
+        public Inventario Inventario { get; set; }
 
         [NotMapped]
-        public string NomeCliente => Cliente?.Nome ?? string.Empty;
+        public string NomeCliente => Cliente?.Nome;
 
         [NotMapped]
-        public string NomeCatalogo => Catalogo?.Titulo ?? string.Empty;
+        public string NomeCatalogo => Catalogo?.Titulo;
     }
 }
