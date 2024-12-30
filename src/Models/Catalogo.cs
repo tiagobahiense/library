@@ -30,7 +30,7 @@ namespace Library.src.Models
         {
         }
 
-        // Construtor com parâmetros
+        
         public Catalogo(string titulo, string autor, int anoLancamento, string genero, int numeroPaginas)
         {
             Titulo = titulo;

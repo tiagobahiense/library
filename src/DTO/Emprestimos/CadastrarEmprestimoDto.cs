@@ -7,11 +7,11 @@ namespace Library.src.DTO.Emprestimos
     {
         public int IdCatalogo { get; set; }
         public DateTime DataEmprestimo { get; set; }
+        public DateTime DataDevolucao { get; set; } 
 
-        public Emprestimo ToEmprestimo(int idCliente)
+        public Emprestimo ToEmprestimo(int idCliente, int idInventario)
         {
-            return new Emprestimo(IdCatalogo, idCliente, DataEmprestimo, DateTime.MinValue);
+            return new Emprestimo(IdCatalogo, idCliente, idInventario, DataEmprestimo, DataDevolucao);
         }
     }
 }
-

@@ -16,8 +16,8 @@ namespace Library.src.Models
 
         public Inventario(int id, Dictionary<int, int> itens)
         {
-            Id = id; // Use o setter público
-            _itens = itens ?? new Dictionary<int, int>(); // Inicializa se for nulo
+            Id = id;
+            _itens = itens ?? new Dictionary<int, int>();
         }
 
         [Key]
@@ -25,14 +25,14 @@ namespace Library.src.Models
         public int Id
         {
             get { return _id; }
-            set { _id = value; } // Adicione o setter público
+            set { _id = value; }
         }
 
         [NotMapped]
         public Dictionary<int, int> Itens
         {
             get { return _itens; }
-            set { _itens = value ?? new Dictionary<int, int>(); } // Inicializa se for nulo
+            set { _itens = value ?? new Dictionary<int, int>(); }
         }
     }
 }

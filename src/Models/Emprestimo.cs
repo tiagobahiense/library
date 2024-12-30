@@ -9,7 +9,7 @@ namespace Library.src.Models
         private int _id;
         private int _idCatalogo;
         private int _idCliente;
-        private int _idInventario; // Adicione esta propriedade se ela existir na tabela
+        private int _idInventario;
         private DateTime _dataEmprestimo;
         private DateTime _dataDevolucao;
 
@@ -17,12 +17,12 @@ namespace Library.src.Models
         {
             _idCatalogo = idCatalogo;
             _idCliente = idCliente;
-            _idInventario = idInventario; // Inicializa a propriedade
+            _idInventario = idInventario; 
             DataEmprestimo = dataEmprestimo;
             DataDevolucao = dataDevolucao;
-            Catalogo = new Catalogo(); // Inicializa a propriedade de navegação
-            Cliente = new Cliente(); // Inicializa a propriedade de navegação
-            Inventario = new Inventario(); // Inicializa a propriedade de navegação
+            Catalogo = new Catalogo(); 
+            Cliente = new Cliente(); 
+            Inventario = new Inventario();
         }
 
         [Key]
@@ -33,7 +33,7 @@ namespace Library.src.Models
             private set { _id = value; }
         }
 
-        [Column("IdCatalogo")] // Especifica o nome da coluna no banco de dados
+        [Column("IdCatalogo")]
         public int IdCatalogo
         {
             get { return _idCatalogo; }
@@ -46,7 +46,7 @@ namespace Library.src.Models
             private set { _idCliente = value; }
         }
 
-        [Column("IdInventario")] // Especifica o nome da coluna no banco de dados
+        [Column("IdInventario")]
         public int IdInventario
         {
             get { return _idInventario; }
@@ -65,7 +65,7 @@ namespace Library.src.Models
             set { _dataDevolucao = value; }
         }
 
-        // Propriedades de navegação
+        
         [ForeignKey("IdCatalogo")]
         public virtual Catalogo Catalogo { get; set; }
 

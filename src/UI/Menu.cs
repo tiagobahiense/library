@@ -312,11 +312,13 @@ namespace Library.src.UI
             {
                 int idCatalogo = ReadInt("ID do Catálogo: ");
                 DateTime dataEmprestimo = ReadDateTime("Data de Emprestimo (YYYY-MM-DD): ");
+                DateTime dataDevolucao = ReadDateTime("Data de Devolução (YYYY-MM-DD): ");
 
                 var emprestimoDto = new CadastrarEmprestimoDto
                 {
                     IdCatalogo = idCatalogo,
-                    DataEmprestimo = dataEmprestimo
+                    DataEmprestimo = dataEmprestimo,
+                    DataDevolucao = dataDevolucao 
                 };
                 emprestimos.Add(emprestimoDto);
 
