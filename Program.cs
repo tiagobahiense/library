@@ -41,7 +41,7 @@ namespace LibraryApp
             services.AddTransient<IInventarioRepository, InventarioRepository>();
             services.AddTransient<IEmprestimoRepository, EmprestimoRepository>();
 
-            // Adicionar logging
+            
             services.AddLogging(configure => configure.AddConsole());
         }
 
