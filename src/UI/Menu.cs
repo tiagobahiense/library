@@ -5,6 +5,7 @@ using Library.src.DTO.Emprestimos;
 using Library.src.Service.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Library.src.UI
 {
@@ -312,7 +313,7 @@ namespace Library.src.UI
             {
                 int idCatalogo = ReadInt("ID do Catálogo: ");
                 int idInventario = ReadInt("ID do Inventário: ");
-                DateTime dataEmprestimo = ReadDateTime("Data de Emprestimo (YYYY-MM-DD): ");
+                DateTime dataEmprestimo = ReadDateTime("Data de Empréstimo (YYYY-MM-DD): ");
                 DateTime dataDevolucao = ReadDateTime("Data de Devolução (YYYY-MM-DD): ");
 
                 var emprestimoDto = new CadastrarEmprestimoDto
@@ -320,7 +321,7 @@ namespace Library.src.UI
                     IdCatalogo = idCatalogo,
                     IdInventario = idInventario,
                     DataEmprestimo = dataEmprestimo,
-                    DataDevolucao = dataDevolucao 
+                    DataDevolucao = dataDevolucao
                 };
                 emprestimos.Add(emprestimoDto);
 
@@ -333,7 +334,6 @@ namespace Library.src.UI
             _emprestimoService.RegistrarEmprestimo(clienteId, emprestimos);
             Console.WriteLine("Empréstimo registrado com sucesso!");
         }
-
 
         private void DevolverEmprestimo()
         {
@@ -381,10 +381,6 @@ namespace Library.src.UI
                 Console.WriteLine("----------------------------------------");
             }
         }
-
-
-
-
 
         private int ReadInt(string prompt)
         {
