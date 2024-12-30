@@ -27,15 +27,15 @@ namespace Library.src.Models
 
         [ForeignKey("IdCatalogo")]
         [Required]
-        public Catalogo Catalogo { get; set; } = null!; // Inicializando a propriedade como não nula
+        public Catalogo Catalogo { get; set; } = null!; 
 
         [ForeignKey("IdCliente")]
         [Required]
-        public Cliente Cliente { get; set; } = null!; // Inicializando a propriedade como não nula
+        public Cliente Cliente { get; set; } = null!; 
 
         [ForeignKey("IdInventario")]
         [Required]
-        public Inventario Inventario { get; set; } = null!; // Inicializando a propriedade como não nula
+        public Inventario Inventario { get; set; } = null!; 
 
         [NotMapped]
         public string NomeCliente => Cliente?.Nome ?? string.Empty;
