@@ -16,6 +16,6 @@ namespace Library.src.Models
         public int QuantidadeDisponivel { get; set; }
 
         [ForeignKey("CatalogoId")]
-        public Catalogo Catalogo { get; set; } = null!; // Inicializando a propriedade como não nula
+        public Catalogo Catalogo { get; set; } = null!;
     }
 }
